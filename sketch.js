@@ -3,3 +3,14 @@ function setup() {
   background(220);
 }
 
+function opskrifter(){
+
+}
+
+function BMI(){
+
+}
+
+function moltid(){
+  
+}
