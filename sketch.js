@@ -56,8 +56,6 @@ function Dashboard() {
       mgr.showScene(FrokostUI)
       HideButtons();
     })
-
-
     AftensmadKnap = createButton("Aftensmad")
     AftensmadKnap.position(125, 250);
     AftensmadKnap.size(100, 30);
@@ -65,8 +63,6 @@ function Dashboard() {
     AftensmadKnap.mousePressed(function () {
       mgr.showScene(AftensmadUI)
     })
-
-
     SnackKnap = createButton("Snack")
     SnackKnap.position(125, 300);
     SnackKnap.style('background-color', '#ECC61A');
