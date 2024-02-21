@@ -371,21 +371,27 @@ function FrokostUI() {
     resultText.style('resize', 'none');
   
     } else {
-      MorgenmadKnap.show();
-      FrokostKnap.show();
-      AftensmadKnap.show();
-      SnackKnap.show();
-      BMIKnap.show();
-      OpskrifterKnap.show();
+      RisButton.show();
+      PastaButton.show();
+      KyllingButton.show();
+      ToastButton.show();
+      AndetButton.show();
+      CancelButton.show();
+      TilføjButton.show();
+      resultText.show();
+
+
     }
   }
   function HideButtons() {
-    MorgenmadKnap.hide();
-    FrokostKnap.hide();
-    AftensmadKnap.hide();
-    SnackKnap.hide();
-    BMIKnap.hide();
-    OpskrifterKnap.hide();
+    RisButton.hide();
+    PastaButton.hide();
+    KyllingButton.hide();
+    ToastButton.hide();
+    AndetButton.hide();
+    CancelButton.hide();
+    TilføjButton.hide();
+    resultText.hide();
   }
 
 }
