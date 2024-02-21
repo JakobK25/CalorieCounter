@@ -18,25 +18,35 @@ function Dashboard(){
     createCanvas(350, 550);
     background(200);
     
-    MorgenmadKnap = createInput();
-    MorgenmadKnap.position(50,50);
-    MorgenmadKnap.size(50)
-    
+  MorgenmadKnap = createButton("Morgenmad");
+  MorgenmadKnap.position(125,150);
+  MorgenmadKnap.size(100, 30);
+  MorgenmadKnap.style('background-color', '#ECC61A');  
+  
+  FrokostKnap = createButton("Frokost")
+  FrokostKnap.position(125, 200);
+  FrokostKnap.size(100, 30);
+  FrokostKnap.style('background-color', '#ECC61A');
 
-    FrokostKnap = createButton(Frokost)
-    FrokostKnap.position()
+  AftensmadKnap = createButton("Aftensmad")
+  AftensmadKnap.position(125, 250);
+  AftensmadKnap.size(100, 30);
+  AftensmadKnap.style('background-color', '#ECC61A');
 
-    AftensmadKnap = createButton(Aftensmad)
-    AftensmadKnap.position()
+  SnackKnap = createButton("Snack")
+  SnackKnap.position(125, 300);
+  SnackKnap.size(100, 30);
+  SnackKnap.style('background-color', '#ECC61A');
 
-    SnackKnap = createButton(Snack)
-    SnackKnap.position()
+  BMIKnap = createButton("BMI")
+  BMIKnap.position(230, 500);
+  BMIKnap.size(100, 30);
+  BMIKnap.style('background-color', '#FFFFFF');
 
-    BMIKnap = createButton(BMI)
-    BMIKnap.position()
-
-    OpskrifterKnap = createButton(Opskrifter)
-    OpskrifterKnap.position()
+  OpskrifterKnap = createButton("Opskrifter")
+  OpskrifterKnap.position(20, 500);
+  OpskrifterKnap.size(100, 30);
+  OpskrifterKnap.style('background-color', '#FFFFFF');
   }
 }
 
