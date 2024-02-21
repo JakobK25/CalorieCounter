@@ -301,7 +301,7 @@ function FrokostUI() {
     fill('#333');
     text("Frokost", width / 2, 50);
 
-
+    if (FrokostKnap == null) {
     RisButton = createButton('Ris');
     RisButton.position(25, 95);
     RisButton.size(290, 40);
@@ -374,8 +374,31 @@ function FrokostUI() {
     resultText.style('border', 'none');
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none');
+  
+    } else {
+      RisButton.show();
+      PastaButton.show();
+      KyllingButton.show();
+      ToastButton.show();
+      AndetButton.show();
+      CancelButton.show();
+      TilføjButton.show();
+      resultText.show();
 
+
+    }
   }
+  function HideButtons() {
+    RisButton.hide();
+    PastaButton.hide();
+    KyllingButton.hide();
+    ToastButton.hide();
+    AndetButton.hide();
+    CancelButton.hide();
+    TilføjButton.hide();
+    resultText.hide();
+  }
+
 }
 
 function AftensmadUI() {
