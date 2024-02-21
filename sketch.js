@@ -42,62 +42,56 @@ function Dashboard() {
         mgr.showScene(MorgenmadUI)
         HideButtons();
       })
-
-      FrokostKnap = createButton("Frokost")
-      FrokostKnap.position(125, 200);
-      FrokostKnap.size(100, 30);
-      FrokostKnap.style('background-color', '#ECC61A');
-      FrokostKnap.mousePressed(function () {
-        mgr.showScene(FrokostUI)
-        HideButtons();
-      })
-
-      AftensmadKnap = createButton("Aftensmad")
-      AftensmadKnap.position(125, 250);
-      AftensmadKnap.size(100, 30);
-      AftensmadKnap.style('background-color', '#ECC61A');
-      AftensmadKnap.mousePressed(function () {
-        mgr.showScene(AftensmadUI)
-        HideButtons();
-      })
-
-      SnackKnap = createButton("Snack")
-      SnackKnap.position(125, 300);
-      SnackKnap.size(100, 30);
-      SnackKnap.style('background-color', '#ECC61A');
-      SnackKnap.mousePressed(function () {
-        mgr.showScene(SnackUI)
-        HideButtons();
-      })
-
-      BMIKnap = createButton("BMI")
-      BMIKnap.position(230, 500);
-      BMIKnap.size(100, 30);
-      BMIKnap.style('background-color', '#FFFFFF');
-      BMIKnap.mousePressed(function () {
-        mgr.showScene(BMIUI)
-        HideButtons();
-      })
-
-      OpskrifterKnap = createButton("Opskrifter")
-      OpskrifterKnap.position(20, 500);
-      OpskrifterKnap.size(100, 30);
-      OpskrifterKnap.style('background-color', '#FFFFFF');
-      OpskrifterKnap.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
-
-    } else {
+    }else{
       MorgenmadKnap.show();
-      FrokostKnap.show();
-      AftensmadKnap.show();
-      SnackKnap.show();
-      BMIKnap.show();
-      OpskrifterKnap.show();
     }
+
+
+    FrokostKnap = createButton("Frokost")
+    FrokostKnap.position(125, 200);
+    FrokostKnap.size(100, 30);
+    FrokostKnap.style('background-color', '#ECC61A');
+    FrokostKnap.mousePressed(function () {
+      mgr.showScene(FrokostUI)
+    })
+
+
+    AftensmadKnap = createButton("Aftensmad")
+    AftensmadKnap.position(125, 250);
+    AftensmadKnap.size(100, 30);
+    AftensmadKnap.style('background-color', '#ECC61A');
+    AftensmadKnap.mousePressed(function () {
+      mgr.showScene(AftensmadUI)
+    })
+
+
+    SnackKnap = createButton("Snack")
+    SnackKnap.position(125, 300);
+    SnackKnap.size(100, 30);
+    SnackKnap.style('background-color', '#ECC61A');
+    SnackKnap.mousePressed(function () {
+      mgr.showScene(SnackUI)
+    })
+
+    BMIKnap = createButton("BMI")
+    BMIKnap.position(230, 500);
+    BMIKnap.size(100, 30);
+    BMIKnap.style('background-color', '#FFFFFF');
+    BMIKnap.mousePressed(function () {
+      mgr.showScene(BMIUI)
+    })
+
+    OpskrifterKnap = createButton("Opskrifter")
+    OpskrifterKnap.position(20, 500);
+    OpskrifterKnap.size(100, 30);
+    OpskrifterKnap.style('background-color', '#FFFFFF');
+    OpskrifterKnap.mousePressed(function () {
+      mgr.showScene(OpskrifterUI)
+    })
   }
-  function HideButtons() {
+
+
+  function HideButtons(){
     MorgenmadKnap.hide();
     FrokostKnap.hide();
     AftensmadKnap.hide();
@@ -184,7 +178,18 @@ function BMIUI() {
     // Opdater tekstfeltet med beskeden
     resultText.value(resultText.value() + ". Du er " + besked);
   }
-
+  if (BMIKnap == null) {
+    BMIKnap = createButton("Morgenmad");
+    BMIKnap.position(125, 150);
+    BMIKnap.size(100, 30);
+    BMIKnap.style('background-color', '#ECC61A');
+    BMIKnap.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
+  }else{
+    BMIKnap.show();
+  }
 
 }
 
@@ -458,6 +463,18 @@ function AftensmadUI() {
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none');
 
+    if (AftensmadKnap == null) {
+      AftensmadKnap = createButton("Morgenmad");
+      AftensmadKnap.position(125, 150);
+      AftensmadKnap.size(100, 30);
+      AftensmadKnap.style('background-color', '#ECC61A');
+      AftensmadKnap.mousePressed(function () {
+        mgr.showScene(Dashboard)
+        HideButtons();
+      })
+    }else{
+      AftensmadKnap.show();
+    }
   }
 }
 
@@ -545,6 +562,19 @@ function SnackUI() {
     resultText.style('border', 'none');
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none');
+
+    if (SnackKnap == null) {
+      SnackKnap = createButton("Morgenmad");
+      SnackKnap.position(125, 150);
+      SnackKnap.size(100, 30);
+      SnackKnap.style('background-color', '#ECC61A');
+      SnackKnap.mousePressed(function () {
+        mgr.showScene(Dashboard)
+        HideButtons();
+      })
+    }else{
+      SnackKnap.show();
+    }
 
   }
 }
