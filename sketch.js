@@ -13,7 +13,7 @@ function setup(){
     mgr.addScene(MorgenmadUI)
     mgr.addScene(frokostUI)
     mgr.addScene(AftensmadUI)
-    mgr.addScene(SnackUI)*/
+    mgr.addScene(SnackUI)
 
 
     mgr.showScene(Dashboard)
