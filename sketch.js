@@ -33,32 +33,50 @@ function Dashboard(){
   MorgenmadKnap = createButton("Morgenmad");
   MorgenmadKnap.position(125,150);
   MorgenmadKnap.size(100, 30);
-  MorgenmadKnap.style('background-color', '#ECC61A');  
+  MorgenmadKnap.style('background-color', '#ECC61A');
+  MorgenmadKnap.mousePressed(function(){
+    mgr.showScene(MorgenmadUI)
+  })
   
   FrokostKnap = createButton("Frokost")
   FrokostKnap.position(125, 200);
   FrokostKnap.size(100, 30);
   FrokostKnap.style('background-color', '#ECC61A');
+  FrokostKnap.mousePressed(function(){
+    mgr.showScene(FrokostUI)
+  })
 
   AftensmadKnap = createButton("Aftensmad")
   AftensmadKnap.position(125, 250);
   AftensmadKnap.size(100, 30);
   AftensmadKnap.style('background-color', '#ECC61A');
+  AftensmadKnap.mousePressed(function(){
+    mgr.showScene(AftensmadUI)
+  })
 
   SnackKnap = createButton("Snack")
   SnackKnap.position(125, 300);
   SnackKnap.size(100, 30);
   SnackKnap.style('background-color', '#ECC61A');
+  SnackKnap.mousePressed(function(){
+    mgr.showScene(SnackUI)
+  })
 
   BMIKnap = createButton("BMI")
   BMIKnap.position(230, 500);
   BMIKnap.size(100, 30);
   BMIKnap.style('background-color', '#FFFFFF');
+  BMIKnap.mousePressed(function(){
+    mgr.showScene(BMIUI)
+  })
 
   OpskrifterKnap = createButton("Opskrifter")
   OpskrifterKnap.position(20, 500);
   OpskrifterKnap.size(100, 30);
   OpskrifterKnap.style('background-color', '#FFFFFF');
+  OpskrifterKnap.mousePressed(function(){
+    mgr.showScene(OpskrifterUI)
+  })
   }
 }
 
