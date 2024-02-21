@@ -1,24 +1,38 @@
-function setup() {
-  createCanvas(350, 550);
-  background(220);
+let mgr;
 
+function setup(){
+  createCanvas(350, 550);
+
+
+  mgr = new SceneManager()
 
     // SceneManager configuration
-    mgr.addScene(dashboard)
+    mgr.addScene(Dashboard)
+    /*
     mgr.addScene(opskrifter)
+  
     mgr.addScene(bmi)
     mgr.addScene(morgenmad)
     mgr.addScene(frokost)
     mgr.addScene(aftensmad)
-    mgr.addScene(snack)
+    mgr.addScene(snack)*/
+
+
+    mgr.showScene(Dashboard)
+
+}
+
+function draw(){
+  mgr.draw()
 }
 
 function Dashboard(){
-  function setup() {
+  this.enter = function() {
+    console.log("Hello")
     createCanvas(350, 550);
     background(200);
     
-    MorgenmadKnap = createInput();
+    let MorgenmadKnap = createButton("Morgenmad");
     MorgenmadKnap.position(50,50);
     MorgenmadKnap.size(50)
     
@@ -35,7 +49,7 @@ function Dashboard(){
     BMIKnap = createButton(BMI)
     BMIKnap.position()
 
-    OpskrifterKnap = createButton(Opskrifter)
+    OpskrifterKnap = createButton("LOL")
     OpskrifterKnap.position()
   }
 }
