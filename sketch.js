@@ -72,7 +72,7 @@ function BMIUI(){
 
   let vægtInput, højdeInput, beregnButton, resultText;
   
-  function setup() {
+  this.enter = function() {
     createCanvas(350, 550);
     background('#f0f0f0');
     
@@ -149,7 +149,7 @@ function moltid(){
 
 function MorgenmadUI(){
 
-  function setup() {
+  this.enter = function() {
     createCanvas(350, 550);
     background('#f0f0f0');
     
@@ -238,7 +238,7 @@ function MorgenmadUI(){
   function FrokostUI(){
 
 
-    function setup() {
+    this.enter = function() {
       createCanvas(350, 550);
       background('#f0f0f0');
       
@@ -326,7 +326,7 @@ function MorgenmadUI(){
 
     function AftensmadUI(){
 
-      function setup() {
+      this.enter = function() {
         createCanvas(350, 550);
         background('#f0f0f0');
         
@@ -414,7 +414,7 @@ function MorgenmadUI(){
 
       function SnackUI(){
 
-        function setup() {
+        this.enter = function() {
           createCanvas(350, 550);
           background('#f0f0f0');
           
