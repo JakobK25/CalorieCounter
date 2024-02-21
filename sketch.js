@@ -25,14 +25,17 @@ function draw() {
 }
 
 function Dashboard() {
+  //alle elementer i Dashboard
   let MorgenmadKnap, FrokostKnap, AftensmadKnap, SnackKnap, BMIKnap, OpskrifterKnap;
 
-
+  //SETUP funktionen der viser alle elementer
   this.enter = function () {
     console.log("Hello")
     createCanvas(350, 550);
     background(200);
 
+    //laver alle elementer HVIS de ikke eksistere
+    //vi tjekker om elementer eksistere ved at tjekke på om de er null
     if (MorgenmadKnap == null) {
       MorgenmadKnap = createButton("Morgenmad");
       MorgenmadKnap.position(125, 150);
@@ -42,9 +45,7 @@ function Dashboard() {
         mgr.showScene(MorgenmadUI)
         HideButtons();
       })
-    }else{
-      MorgenmadKnap.show();
-    }
+    
 
 
     FrokostKnap = createButton("Frokost")
@@ -53,6 +54,7 @@ function Dashboard() {
     FrokostKnap.style('background-color', '#ECC61A');
     FrokostKnap.mousePressed(function () {
       mgr.showScene(FrokostUI)
+      HideButtons();
     })
 
 
@@ -67,7 +69,6 @@ function Dashboard() {
 
     SnackKnap = createButton("Snack")
     SnackKnap.position(125, 300);
-    SnackKnap.size(100, 30);
     SnackKnap.style('background-color', '#ECC61A');
     SnackKnap.mousePressed(function () {
       mgr.showScene(SnackUI)
@@ -88,9 +89,21 @@ function Dashboard() {
     OpskrifterKnap.mousePressed(function () {
       mgr.showScene(OpskrifterUI)
     })
+
+    
+  }
+  //Ellers eksistere de og vi viser dem bare
+  else{
+    MorgenmadKnap.show();
+    FrokostKnap.show();
+    AftensmadKnap.show();
+    SnackKnap.show();
+    BMIKnap.show();
+    OpskrifterKnap.show();
+  }
   }
 
-
+  //ksjuler alle elementer i denne scene (DASHBOARD)
   function HideButtons(){
     MorgenmadKnap.hide();
     FrokostKnap.hide();
