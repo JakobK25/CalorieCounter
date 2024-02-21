@@ -293,6 +293,7 @@ function MorgenmadUI() {
 
 function FrokostUI() {
 
+let RisButton, PastaButton, KyllingButton, ToastButton, AndetButton, CancelButton, TilføjButton
 
   this.enter = function () {
     createCanvas(350, 550);
@@ -303,11 +304,11 @@ function FrokostUI() {
     fill('#333');
     text("Frokost", width / 2, 50);
 
-    if (FrokostKnap == null) {
+    
+    if (RisButton == null) {
     RisButton = createButton('Ris');
     RisButton.position(25, 95);
     RisButton.size(290, 40);
-    RisButton.mousePressed();
     RisButton.style('background-color', 'yellow');
     RisButton.style('color', 'black');
     RisButton.style('border', 'none');
@@ -352,11 +353,14 @@ function FrokostUI() {
     CancelButton = createButton('Cancel');
     CancelButton.position(15, 395);
     CancelButton.size(150, 40);
-    CancelButton.mousePressed();
     CancelButton.style('background-color', 'red');
     CancelButton.style('color', 'black');
     CancelButton.style('border', 'none');
     CancelButton.style('border-radius', '5px');
+    CancelButton.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
 
     TilføjButton = createButton('Tilføj');
     TilføjButton.position(180, 395);
@@ -386,11 +390,10 @@ function FrokostUI() {
       CancelButton.show();
       TilføjButton.show();
       resultText.show();
-
-
     }
   }
   function HideButtons() {
+    console.log("test")
     RisButton.hide();
     PastaButton.hide();
     KyllingButton.hide();
@@ -400,7 +403,6 @@ function FrokostUI() {
     TilføjButton.hide();
     resultText.hide();
   }
-
 }
 
 function AftensmadUI() {
