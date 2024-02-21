@@ -178,18 +178,7 @@ function BMIUI() {
     // Opdater tekstfeltet med beskeden
     resultText.value(resultText.value() + ". Du er " + besked);
   }
-  if (BMIKnap == null) {
-    BMIKnap = createButton("Morgenmad");
-    BMIKnap.position(125, 150);
-    BMIKnap.size(100, 30);
-    BMIKnap.style('background-color', '#ECC61A');
-    BMIKnap.mousePressed(function () {
-      mgr.showScene(Dashboard)
-      HideButtons();
-    })
-  }else{
-    BMIKnap.show();
-  }
+
 
 }
 
@@ -402,7 +391,7 @@ function FrokostUI() {
 }
 
 function AftensmadUI() {
-let KartoflerButton, resultText, CancelButton
+let KartoflerButton, resultText, CancelButton, BroccoliButton, KyllingButton, KRBButton, AndetButton, TilføjButton
   this.enter = function () {
     createCanvas(350, 550);
     background('#f0f0f0');
@@ -497,14 +486,26 @@ let KartoflerButton, resultText, CancelButton
     resultText.style('resize', 'none');
 
     }else{
-      AftensmadKnap.show();
       resultText.show();
+      KartoflerButton.show();
+      BroccoliButton.show();
+      KRBButton.show();
+      AndetButton.show();
+      KyllingButton.show();
+      TilføjButton.show();
+      CancelButton.show();
     }
   }
 
   function HideButtons(){
-    KartoflerButton.Hide();
-    resultText.Hide();
+    resultText.hide();
+    KartoflerButton.hide();
+    BroccoliButton.hide();
+    KRBButton.hide();
+    AndetButton.hide();
+    KyllingButton.hide();
+    TilføjButton.hide();
+    CancelButton.hide();
   }
 }
 
