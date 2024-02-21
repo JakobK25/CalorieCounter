@@ -198,6 +198,7 @@ function moltid() {
 }
 
 function MorgenmadUI() {
+  let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText
 
   this.enter = function () {
     createCanvas(350, 550);
@@ -208,15 +209,16 @@ function MorgenmadUI() {
     fill('#333');
     text("Morgenmad", width / 2, 50);
 
-
-    skyrButton = createButton('Skyr');
-    skyrButton.position(25, 95);
-    skyrButton.size(290, 40);
-    skyrButton.mousePressed();
-    skyrButton.style('background-color', 'yellow');
-    skyrButton.style('color', 'black');
-    skyrButton.style('border', 'none');
-    skyrButton.style('border-radius', '5px');
+    if(SkyrButton == null){
+     
+    SkyrButton = createButton('Skyr');
+    SkyrButton.position(25, 95);
+    SkyrButton.size(290, 40);
+    SkyrButton.mousePressed();
+    SkyrButton.style('background-color', 'yellow');
+    SkyrButton.style('color', 'black');
+    SkyrButton.style('border', 'none');
+    SkyrButton.style('border-radius', '5px');
 
     BananButton = createButton('Banan');
     BananButton.position(25, 145);
@@ -265,6 +267,7 @@ function MorgenmadUI() {
 
     CancelButton.mousePressed(function () {
       mgr.showScene(Dashboard)
+      HideButtons();
     })
 
     TilføjButton = createButton('Tilføj');
@@ -276,16 +279,36 @@ function MorgenmadUI() {
     TilføjButton.style('border', 'none');
     TilføjButton.style('border-radius', '5px');
 
-    resultText = createElement('textarea', "Antal kcal:");
-    resultText.position(30, 450);
-    resultText.size(290, 80);
-    resultText.attribute('readonly', 'true');
-    resultText.style('font-size', '18px');
-    resultText.style('background-color', '#ffffff');
-    resultText.style('border', 'none');
-    resultText.style('border-radius', '5px');
-    resultText.style('resize', 'none');
-
+    ResultText = createElement('textarea', "Antal kcal:");
+    ResultText.position(30, 450);
+    ResultText.size(290, 80);
+    ResultText.attribute('readonly', 'true');
+    ResultText.style('font-size', '18px');
+    ResultText.style('background-color', '#ffffff');
+    ResultText.style('border', 'none');
+    ResultText.style('border-radius', '5px');
+    ResultText.style('resize', 'none');
+  }
+  else{
+    SkyrButton.show()
+    BananButton.show()
+    BollerButton.show()
+    SmoothieButton.show()
+    AndetButton.show()
+    CancelButton.show()
+    TilføjButton.show()
+    ResultText.show()
+  }
+  }
+  function HideButtons() {
+    SkyrButton.hide()
+    BananButton.hide()
+    BollerButton.hide()
+    SmoothieButton.hide()
+    AndetButton.hide()
+    CancelButton.hide()
+    TilføjButton.hide()
+    ResultText.hide()
   }
 }
 
