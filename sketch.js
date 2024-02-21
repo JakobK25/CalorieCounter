@@ -8,14 +8,12 @@ function setup(){
 
     // SceneManager configuration
     mgr.addScene(Dashboard)
-    /*
     mgr.addScene(opskrifter)
-  
-    mgr.addScene(bmi)
-    mgr.addScene(morgenmad)
-    mgr.addScene(frokost)
-    mgr.addScene(aftensmad)
-    mgr.addScene(snack)*/
+    mgr.addScene(BMI)
+    mgr.addScene(MorgenmadUI)
+    mgr.addScene(frokostUI)
+    mgr.addScene(AftensmadUI)
+    mgr.addScene(SnackUI)*/
 
 
     mgr.showScene(Dashboard)
