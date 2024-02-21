@@ -9,7 +9,7 @@ function setup(){
     // SceneManager configuration
     mgr.addScene(Dashboard)
     mgr.addScene(opskrifter)
-    mgr.addScene(BMI)
+    mgr.addScene(BMIUI)
     mgr.addScene(MorgenmadUI)
     mgr.addScene(frokostUI)
     mgr.addScene(AftensmadUI)
@@ -66,7 +66,7 @@ function opskrifter(){
 
 }
 
-function BMI(){
+function BMIUI(){
   
 
 
