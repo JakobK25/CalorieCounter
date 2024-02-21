@@ -523,7 +523,8 @@ let KartoflerButton, resultText, CancelButton, BroccoliButton, KyllingButton, KR
 }
 
 function SnackUI() {
-let KaffeButton, RiskiksButton,SkyrButton,PBButton,AndetButton,CancelButton,TilføjButton,resultText
+let KaffeButton, RiskiksButton, SkyrButton, PBButton, AndetButton, CancelButton, TilføjButton, resultText
+
   this.enter = function () {
     createCanvas(350, 550);
     background('#f0f0f0');
@@ -534,6 +535,7 @@ let KaffeButton, RiskiksButton,SkyrButton,PBButton,AndetButton,CancelButton,Tilf
     text("Snacks", width / 2, 50);
 
     if(KaffeButton == null){
+
     KaffeButton = createButton('Kaffe');
     KaffeButton.position(25, 95);
     KaffeButton.size(290, 40);
@@ -582,11 +584,14 @@ let KaffeButton, RiskiksButton,SkyrButton,PBButton,AndetButton,CancelButton,Tilf
     CancelButton = createButton('Cancel');
     CancelButton.position(15, 395);
     CancelButton.size(150, 40);
-    CancelButton.mousePressed();
     CancelButton.style('background-color', 'red');
     CancelButton.style('color', 'black');
     CancelButton.style('border', 'none');
     CancelButton.style('border-radius', '5px');
+    CancelButton.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
 
     TilføjButton = createButton('Tilføj');
     TilføjButton.position(180, 395);
@@ -609,8 +614,8 @@ let KaffeButton, RiskiksButton,SkyrButton,PBButton,AndetButton,CancelButton,Tilf
 
   }else{
     resultText.show();
-    PBButtonButton.show();
-    KaffeButtonButton.shwo();
+    PBButton.show();
+    KaffeButton.show();
     RiskiksButton.show();
     AndetButton.show();
     SkyrButton.show();
@@ -621,8 +626,8 @@ let KaffeButton, RiskiksButton,SkyrButton,PBButton,AndetButton,CancelButton,Tilf
 
 function HideButtons(){
   resultText.hide();
-  PBButtonButton.hide();
-  KaffeButtonButton.hide();
+  PBButton.hide();
+  KaffeButton.hide();
   RiskiksButton.hide();
   AndetButton.hide();
   SkyrButton.hide();
