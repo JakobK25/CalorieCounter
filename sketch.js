@@ -1,20 +1,32 @@
-function setup() {
-  createCanvas(350, 550);
-  background(220);
+let mgr;
 
+function setup(){
+  createCanvas(350, 550);
+
+
+  mgr = new SceneManager()
 
     // SceneManager configuration
-    mgr.addScene(dashboard)
-    mgr.addScene(opskrifter)
-    mgr.addScene(bmi)
-    mgr.addScene(morgenmad)
-    mgr.addScene(frokost)
-    mgr.addScene(aftensmad)
-    mgr.addScene(snack)
+    mgr.addScene(Dashboard)
+    mgr.addScene(OpskrifterUI)
+    mgr.addScene(BMIUI)
+    mgr.addScene(MorgenmadUI)
+    mgr.addScene(FrokostUI)
+    mgr.addScene(AftensmadUI)
+    mgr.addScene(SnackUI)
+
+
+    mgr.showScene(Dashboard)
+
+}
+
+function draw(){
+  mgr.draw()
 }
 
 function Dashboard(){
-  function setup() {
+  this.enter = function() {
+    console.log("Hello")
     createCanvas(350, 550);
     background(200);
     
@@ -50,11 +62,11 @@ function Dashboard(){
   }
 }
 
-function opskrifter(){
+function OpskrifterUI(){
 
 }
 
-function BMI(){
+function BMIUI(){
   
 
 
@@ -223,7 +235,7 @@ function MorgenmadUI(){
   }
   }
   
-  function frokostUI(){
+  function FrokostUI(){
 
 
     function setup() {
