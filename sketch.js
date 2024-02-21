@@ -379,7 +379,7 @@ function FrokostUI() {
 }
 
 function AftensmadUI() {
-
+let KartoflerButton, resultText, CancelButton
   this.enter = function () {
     createCanvas(350, 550);
     background('#f0f0f0');
@@ -389,6 +389,7 @@ function AftensmadUI() {
     fill('#333');
     text("Aftensmad", width / 2, 50);
 
+    if(KartoflerButton == null){
 
     KartoflerButton = createButton('Kartofler');
     KartoflerButton.position(25, 95);
@@ -398,6 +399,11 @@ function AftensmadUI() {
     KartoflerButton.style('color', 'black');
     KartoflerButton.style('border', 'none');
     KartoflerButton.style('border-radius', '5px');
+    KartoflerButton.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
+
 
     BroccoliButton = createButton('Broccoli');
     BroccoliButton.position(25, 145);
@@ -407,6 +413,7 @@ function AftensmadUI() {
     BroccoliButton.style('color', 'black');
     BroccoliButton.style('border', 'none');
     BroccoliButton.style('border-radius', '5px');
+
 
     KyllingButton = createButton('Kylling');
     KyllingButton.position(25, 195);
@@ -438,11 +445,14 @@ function AftensmadUI() {
     CancelButton = createButton('Cancel');
     CancelButton.position(15, 395);
     CancelButton.size(150, 40);
-    CancelButton.mousePressed();
     CancelButton.style('background-color', 'red');
     CancelButton.style('color', 'black');
     CancelButton.style('border', 'none');
-    CancelButton.style('border-radius', '5px');
+    CancelButton.style('border-radius', '5px');    
+    CancelButton.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
 
     TilføjButton = createButton('Tilføj');
     TilføjButton.position(180, 395);
@@ -463,18 +473,15 @@ function AftensmadUI() {
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none');
 
-    if (AftensmadKnap == null) {
-      AftensmadKnap = createButton("Morgenmad");
-      AftensmadKnap.position(125, 150);
-      AftensmadKnap.size(100, 30);
-      AftensmadKnap.style('background-color', '#ECC61A');
-      AftensmadKnap.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
     }else{
       AftensmadKnap.show();
+      resultText.show();
     }
+  }
+
+  function HideButtons(){
+    KartoflerButton.Hide();
+    resultText.Hide();
   }
 }
 
