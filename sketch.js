@@ -8,10 +8,10 @@ function setup(){
 
     // SceneManager configuration
     mgr.addScene(Dashboard)
-    mgr.addScene(opskrifter)
+    mgr.addScene(OpskrifterUI)
     mgr.addScene(BMIUI)
     mgr.addScene(MorgenmadUI)
-    mgr.addScene(frokostUI)
+    mgr.addScene(FrokostUI)
     mgr.addScene(AftensmadUI)
     mgr.addScene(SnackUI)
 
@@ -62,7 +62,7 @@ function Dashboard(){
   }
 }
 
-function opskrifter(){
+function OpskrifterUI(){
 
 }
 
@@ -235,7 +235,7 @@ function MorgenmadUI(){
   }
   }
   
-  function frokostUI(){
+  function FrokostUI(){
 
 
     function setup() {
