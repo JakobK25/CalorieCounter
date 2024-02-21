@@ -65,7 +65,7 @@ function Dashboard() {
     })
     SnackKnap = createButton("Snack")
     SnackKnap.position(125, 300);
-    AftensmadKnap.size(100, 30);
+    SnackKnap.size(100, 30);
     SnackKnap.style('background-color', '#ECC61A');
     SnackKnap.mousePressed(function () {
       mgr.showScene(SnackUI)
