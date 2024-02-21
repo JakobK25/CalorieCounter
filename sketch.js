@@ -131,6 +131,7 @@ function BMIUI() {
     fill('#333');
     text("BMI Beregner", width / 2, 50);
 
+  if (vægtInput == null) {
     vægtInput = createInput();
     vægtInput.position(60, 140);
     vægtInput.size(230, 40);
@@ -158,6 +159,18 @@ function BMIUI() {
     beregnButton.style('border', 'none');
     beregnButton.style('border-radius', '5px');
 
+    CancelButton = createButton('Cancel');
+    CancelButton.position(90, 460);
+    CancelButton.size(150, 40);
+    CancelButton.style('background-color', 'red');
+    CancelButton.style('color', 'black');
+    CancelButton.style('border', 'none');
+    CancelButton.style('border-radius', '5px');
+    CancelButton.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
+
     resultText = createElement('textarea', "Dit BMI er:");
     resultText.position(30, 360);
     resultText.size(290, 80);
@@ -167,6 +180,23 @@ function BMIUI() {
     resultText.style('border', 'none');
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none'); // Forhindrer ændring af størrelse
+
+  }else{
+    resultText.show();
+    CancelButton.show();
+    beregnButton.show();
+    vægtInput.show();
+    højdeInput.show();
+  }
+}
+
+function HideButtons(){
+  resultText.hide();
+  CancelButton.hide();
+  beregnButton.hide();
+  vægtInput.hide();
+  højdeInput.hide();
+}
   }
 
   function beregnBMI() {
@@ -189,9 +219,7 @@ function BMIUI() {
     // Opdater tekstfeltet med beskeden
     resultText.value(resultText.value() + ". Du er " + besked);
   }
-
-
-}
+  
 
 function moltid() {
 
