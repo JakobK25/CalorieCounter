@@ -11,8 +11,6 @@ function setup() {
   mgr.addScene(aftensmad)
   mgr.addScene(snack)
 
-
-
 }
 
 function opskrifter(){
@@ -21,8 +19,6 @@ function opskrifter(){
 
 function bmi(){
   
-
-
   let vægtInput, højdeInput, beregnButton, resultText;
   
   function setup() {
