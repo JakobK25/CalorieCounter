@@ -523,7 +523,7 @@ let KartoflerButton, resultText, CancelButton, BroccoliButton, KyllingButton, KR
 }
 
 function SnackUI() {
-
+let KaffeButton, RiskiksButton,SkyrButton,PBButton,AndetButton,CancelButton,TilføjButton,resultText
   this.enter = function () {
     createCanvas(350, 550);
     background('#f0f0f0');
@@ -533,7 +533,7 @@ function SnackUI() {
     fill('#333');
     text("Snacks", width / 2, 50);
 
-
+    if(KaffeButton == null){
     KaffeButton = createButton('Kaffe');
     KaffeButton.position(25, 95);
     KaffeButton.size(290, 40);
@@ -607,18 +607,29 @@ function SnackUI() {
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none');
 
-    if (SnackKnap == null) {
-      SnackKnap = createButton("Morgenmad");
-      SnackKnap.position(125, 150);
-      SnackKnap.size(100, 30);
-      SnackKnap.style('background-color', '#ECC61A');
-      SnackKnap.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
-    }else{
-      SnackKnap.show();
-    }
+  }else{
+    resultText.show();
+    PBButtonButton.show();
+    KaffeButtonButton.shwo();
+    RiskiksButton.show();
+    AndetButton.show();
+    SkyrButton.show();
+    TilføjButton.show();
+    CancelButton.show();
+  }
+}
+
+function HideButtons(){
+  resultText.hide();
+  PBButtonButton.hide();
+  KaffeButtonButton.hide();
+  RiskiksButton.hide();
+  AndetButton.hide();
+  SkyrButton.hide();
+  TilføjButton.hide();
+  CancelButton.hide();
+
+ 
 
   }
 }
