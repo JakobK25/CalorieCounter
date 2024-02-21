@@ -42,9 +42,6 @@ function Dashboard() {
         mgr.showScene(MorgenmadUI)
         HideButtons();
       })
-    }else{
-      MorgenmadKnap.show();
-    }
 
 
     FrokostKnap = createButton("Frokost")
@@ -53,6 +50,7 @@ function Dashboard() {
     FrokostKnap.style('background-color', '#ECC61A');
     FrokostKnap.mousePressed(function () {
       mgr.showScene(FrokostUI)
+
     })
 
 
@@ -62,6 +60,7 @@ function Dashboard() {
     AftensmadKnap.style('background-color', '#ECC61A');
     AftensmadKnap.mousePressed(function () {
       mgr.showScene(AftensmadUI)
+      HideButtons();
     })
 
 
@@ -71,6 +70,7 @@ function Dashboard() {
     SnackKnap.style('background-color', '#ECC61A');
     SnackKnap.mousePressed(function () {
       mgr.showScene(SnackUI)
+      HideButtons();
     })
 
     BMIKnap = createButton("BMI")
@@ -79,6 +79,7 @@ function Dashboard() {
     BMIKnap.style('background-color', '#FFFFFF');
     BMIKnap.mousePressed(function () {
       mgr.showScene(BMIUI)
+      HideButtons();
     })
 
     OpskrifterKnap = createButton("Opskrifter")
@@ -87,7 +88,17 @@ function Dashboard() {
     OpskrifterKnap.style('background-color', '#FFFFFF');
     OpskrifterKnap.mousePressed(function () {
       mgr.showScene(OpskrifterUI)
+      HideButtons();
     })
+
+  }else{
+    MorgenmadKnap.show();
+    FrokostKnap.show();
+    AftensmadKnap.show();
+    SnackKnap.show();
+    BMIKnap.show();
+    OpskrifterKnap.show();
+  }
   }
 
 
