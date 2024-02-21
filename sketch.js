@@ -1,13 +1,25 @@
 function setup() {
   createCanvas(350, 550);
   background(220);
+
+  // SceneManager configuration
+  mgr.addScene(dashboard)
+  mgr.addScene(opskrifter)
+  mgr.addScene(bmi)
+  mgr.addScene(morgenmad)
+  mgr.addScene(frokost)
+  mgr.addScene(aftensmad)
+  mgr.addScene(snack)
+
+
+
 }
 
 function opskrifter(){
 
 }
 
-function BMI(){
+function bmi(){
   
 
 
