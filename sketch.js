@@ -42,62 +42,56 @@ function Dashboard() {
         mgr.showScene(MorgenmadUI)
         HideButtons();
       })
-
-      FrokostKnap = createButton("Frokost")
-      FrokostKnap.position(125, 200);
-      FrokostKnap.size(100, 30);
-      FrokostKnap.style('background-color', '#ECC61A');
-      FrokostKnap.mousePressed(function () {
-        mgr.showScene(FrokostUI)
-        HideButtons();
-      })
-
-      AftensmadKnap = createButton("Aftensmad")
-      AftensmadKnap.position(125, 250);
-      AftensmadKnap.size(100, 30);
-      AftensmadKnap.style('background-color', '#ECC61A');
-      AftensmadKnap.mousePressed(function () {
-        mgr.showScene(AftensmadUI)
-        HideButtons();
-      })
-
-      SnackKnap = createButton("Snack")
-      SnackKnap.position(125, 300);
-      SnackKnap.size(100, 30);
-      SnackKnap.style('background-color', '#ECC61A');
-      SnackKnap.mousePressed(function () {
-        mgr.showScene(SnackUI)
-        HideButtons();
-      })
-
-      BMIKnap = createButton("BMI")
-      BMIKnap.position(230, 500);
-      BMIKnap.size(100, 30);
-      BMIKnap.style('background-color', '#FFFFFF');
-      BMIKnap.mousePressed(function () {
-        mgr.showScene(BMIUI)
-        HideButtons();
-      })
-
-      OpskrifterKnap = createButton("Opskrifter")
-      OpskrifterKnap.position(20, 500);
-      OpskrifterKnap.size(100, 30);
-      OpskrifterKnap.style('background-color', '#FFFFFF');
-      OpskrifterKnap.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
-
-    } else {
+    }else{
       MorgenmadKnap.show();
-      FrokostKnap.show();
-      AftensmadKnap.show();
-      SnackKnap.show();
-      BMIKnap.show();
-      OpskrifterKnap.show();
     }
+
+
+    FrokostKnap = createButton("Frokost")
+    FrokostKnap.position(125, 200);
+    FrokostKnap.size(100, 30);
+    FrokostKnap.style('background-color', '#ECC61A');
+    FrokostKnap.mousePressed(function () {
+      mgr.showScene(FrokostUI)
+    })
+
+
+    AftensmadKnap = createButton("Aftensmad")
+    AftensmadKnap.position(125, 250);
+    AftensmadKnap.size(100, 30);
+    AftensmadKnap.style('background-color', '#ECC61A');
+    AftensmadKnap.mousePressed(function () {
+      mgr.showScene(AftensmadUI)
+    })
+
+
+    SnackKnap = createButton("Snack")
+    SnackKnap.position(125, 300);
+    SnackKnap.size(100, 30);
+    SnackKnap.style('background-color', '#ECC61A');
+    SnackKnap.mousePressed(function () {
+      mgr.showScene(SnackUI)
+    })
+
+    BMIKnap = createButton("BMI")
+    BMIKnap.position(230, 500);
+    BMIKnap.size(100, 30);
+    BMIKnap.style('background-color', '#FFFFFF');
+    BMIKnap.mousePressed(function () {
+      mgr.showScene(BMIUI)
+    })
+
+    OpskrifterKnap = createButton("Opskrifter")
+    OpskrifterKnap.position(20, 500);
+    OpskrifterKnap.size(100, 30);
+    OpskrifterKnap.style('background-color', '#FFFFFF');
+    OpskrifterKnap.mousePressed(function () {
+      mgr.showScene(OpskrifterUI)
+    })
   }
-  function HideButtons() {
+
+
+  function HideButtons(){
     MorgenmadKnap.hide();
     FrokostKnap.hide();
     AftensmadKnap.hide();
@@ -399,7 +393,7 @@ let RisButton, PastaButton, KyllingButton, ToastButton, AndetButton, CancelButto
 }
 
 function AftensmadUI() {
-
+let KartoflerButton, resultText, CancelButton, BroccoliButton, KyllingButton, KRBButton, AndetButton, TilføjButton
   this.enter = function () {
     createCanvas(350, 550);
     background('#f0f0f0');
@@ -409,6 +403,7 @@ function AftensmadUI() {
     fill('#333');
     text("Aftensmad", width / 2, 50);
 
+    if(KartoflerButton == null){
 
     KartoflerButton = createButton('Kartofler');
     KartoflerButton.position(25, 95);
@@ -418,6 +413,11 @@ function AftensmadUI() {
     KartoflerButton.style('color', 'black');
     KartoflerButton.style('border', 'none');
     KartoflerButton.style('border-radius', '5px');
+    KartoflerButton.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
+
 
     BroccoliButton = createButton('Broccoli');
     BroccoliButton.position(25, 145);
@@ -427,6 +427,7 @@ function AftensmadUI() {
     BroccoliButton.style('color', 'black');
     BroccoliButton.style('border', 'none');
     BroccoliButton.style('border-radius', '5px');
+
 
     KyllingButton = createButton('Kylling');
     KyllingButton.position(25, 195);
@@ -458,11 +459,14 @@ function AftensmadUI() {
     CancelButton = createButton('Cancel');
     CancelButton.position(15, 395);
     CancelButton.size(150, 40);
-    CancelButton.mousePressed();
     CancelButton.style('background-color', 'red');
     CancelButton.style('color', 'black');
     CancelButton.style('border', 'none');
-    CancelButton.style('border-radius', '5px');
+    CancelButton.style('border-radius', '5px');    
+    CancelButton.mousePressed(function () {
+      mgr.showScene(Dashboard)
+      HideButtons();
+    })
 
     TilføjButton = createButton('Tilføj');
     TilføjButton.position(180, 395);
@@ -483,6 +487,27 @@ function AftensmadUI() {
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none');
 
+    }else{
+      resultText.show();
+      KartoflerButton.show();
+      BroccoliButton.show();
+      KRBButton.show();
+      AndetButton.show();
+      KyllingButton.show();
+      TilføjButton.show();
+      CancelButton.show();
+    }
+  }
+
+  function HideButtons(){
+    resultText.hide();
+    KartoflerButton.hide();
+    BroccoliButton.hide();
+    KRBButton.hide();
+    AndetButton.hide();
+    KyllingButton.hide();
+    TilføjButton.hide();
+    CancelButton.hide();
   }
 }
 
@@ -570,6 +595,19 @@ function SnackUI() {
     resultText.style('border', 'none');
     resultText.style('border-radius', '5px');
     resultText.style('resize', 'none');
+
+    if (SnackKnap == null) {
+      SnackKnap = createButton("Morgenmad");
+      SnackKnap.position(125, 150);
+      SnackKnap.size(100, 30);
+      SnackKnap.style('background-color', '#ECC61A');
+      SnackKnap.mousePressed(function () {
+        mgr.showScene(Dashboard)
+        HideButtons();
+      })
+    }else{
+      SnackKnap.show();
+    }
 
   }
 }
