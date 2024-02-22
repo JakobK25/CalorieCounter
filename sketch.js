@@ -60,128 +60,122 @@ function Dashboard() {
     // Simuleret kalorieindtag (f.eks. fra en anden funktion)
     let FinalCalorie = 0; // Kalorier indtaget i dette tidsinterval
 
-    function setup() {
-      createCanvas(400, 400);
-      CalorieGoal = createInput();
+    CalorieGoal = createInput();
+    CalorieGoal.position(105, 400)
+    CalorieGoal.size(130,30)
+    // Opdater kalorier baseret på simulering
+    CurrentCalories += FinalCalorie;
 
+    // Beregn fyldningsgraden i grader
+    let CircleInFill = map(CurrentCalories, 0, CalorieGoal, 0, 360);
+
+    // Beregn procentdel af målet
+    let procentOpnået = CurrentCalories / CalorieGoal;
+
+    // Juster fyldningsgraden for at nå 360 grader ved 100%
+    if (procentOpnået >= 1) {
+      CircleInFill = 360;
     }
 
-    function draw() {
-      background(220);
+    // Beregn farve baseret på procentdel
+    let farveCirkle = lerpColor(color(255, 0, 0), color(0, 255, 0), procentOpnået);
 
-      // Opdater kalorier baseret på simulering
-      CurrentCalories += FinalCalorie;
+    // Tegn cirkel med variabel fyldning og farve
+    noFill();
+    strokeWeight(4);
+    stroke(50);
+    ellipse(175, 60, radius * 1, radius * 1);
 
-      // Beregn fyldningsgraden i grader
-      let CircleInFill = map(CurrentCalories, 0, CalorieGoal, 0, 360);
+    fill(farveCirkle);
+    arc(175, 60, radius * 1, radius * 1, 0, radians(CircleInFill));
 
-      // Beregn procentdel af målet
-      let procentOpnået = CurrentCalories / CalorieGoal;
-
-      // Juster fyldningsgraden for at nå 360 grader ved 100%
-      if (procentOpnået >= 1) {
-        CircleInFill = 360;
-      }
-
-      // Beregn farve baseret på procentdel
-      let farveCirkle = lerpColor(color(255, 0, 0), color(0, 255, 0), procentOpnået);
-
-      // Tegn cirkel med variabel fyldning og farve
-      noFill();
-      strokeWeight(4);
-      stroke(50);
-      ellipse(200, 220, radius * 2, radius * 2);
-
-      fill(farveCirkle);
-      arc(200, 220, radius * 2, radius * 2, 0, radians(CircleInFill));
-
-      // Vis tekst med kalorier og procentdel
-      textSize(16);
-      textAlign(CENTER);
-      text(`${CurrentCalories} / ${CalorieGoal} Kalorier indtaget`, 200, 300 + 50);
-    }
-
-    function logMåltid(FinalCalorie, kalorier) {
-      FinalCalorie += kalorier;
-    }
-
-    //laver alle elementer HVIS de ikke eksistere
-    //vi tjekker om elementer eksistere ved at tjekke på om de er null
-    if (MorgenmadKnap == null) {
-      MorgenmadKnap = createButton("Morgenmad");
-      MorgenmadKnap.position(125, 150);
-      MorgenmadKnap.size(100, 30);
-      MorgenmadKnap.style('background-color', '#ECC61A');
-      MorgenmadKnap.mousePressed(function () {
-        mgr.showScene(MorgenmadUI)
-        HideButtons();
-      })
-
-
-      FrokostKnap = createButton("Frokost")
-      FrokostKnap.position(125, 200);
-      FrokostKnap.size(100, 30);
-      FrokostKnap.style('background-color', '#ECC61A');
-      FrokostKnap.mousePressed(function () {
-        mgr.showScene(FrokostUI)
-        HideButtons();
-
-      })
-      AftensmadKnap = createButton("Aftensmad")
-      AftensmadKnap.position(125, 250);
-      AftensmadKnap.size(100, 30);
-      AftensmadKnap.style('background-color', '#ECC61A');
-      AftensmadKnap.mousePressed(function () {
-        mgr.showScene(AftensmadUI)
-        HideButtons();
-      })
-      SnackKnap = createButton("Snack")
-      SnackKnap.position(125, 300);
-      SnackKnap.size(100, 30);
-      SnackKnap.style('background-color', '#ECC61A');
-      SnackKnap.mousePressed(function () {
-        mgr.showScene(SnackUI)
-        HideButtons();
-      })
-
-      LigevægtsindtagKnap = createButton("Ligevægts beregner")
-      LigevægtsindtagKnap.position(220, 500);
-      LigevægtsindtagKnap.size(120, 40);
-      LigevægtsindtagKnap.style('background-color', '#FFFFFF');
-      LigevægtsindtagKnap.mousePressed(function () {
-        mgr.showScene(LigevægtsindtagUI)
-        HideButtons();
-      })
-
-      OpskrifterKnap = createButton("Opskrifter")
-      OpskrifterKnap.position(20, 500);
-      OpskrifterKnap.size(120, 40);
-      OpskrifterKnap.style('background-color', '#FFFFFF');
-      OpskrifterKnap.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
-
-    } else {
-      MorgenmadKnap.show();
-      FrokostKnap.show();
-      AftensmadKnap.show();
-      SnackKnap.show();
-      LigevægtsindtagKnap.show();
-      OpskrifterKnap.show();
-    }
+    // Vis tekst med kalorier og procentdel
+    textSize(16);
+    textAlign(CENTER);
+    text(`${CurrentCalories} / ${CalorieGoal}`, 175,138);
   }
 
-  //ksjuler alle elementer i denne scene (DASHBOARD)
-  function HideButtons() {
-    MorgenmadKnap.hide();
-    FrokostKnap.hide();
-    AftensmadKnap.hide();
-    SnackKnap.hide();
-    LigevægtsindtagKnap.hide();
-    OpskrifterKnap.hide();
+  function logMåltid(FinalCalorie, kalorier) {
+    FinalCalorie += kalorier;
+  }
+
+  //laver alle elementer HVIS de ikke eksistere
+  //vi tjekker om elementer eksistere ved at tjekke på om de er null
+  if (MorgenmadKnap == null) {
+    MorgenmadKnap = createButton("Morgenmad");
+    MorgenmadKnap.position(125, 150);
+    MorgenmadKnap.size(100, 30);
+    MorgenmadKnap.style('background-color', '#ECC61A');
+    MorgenmadKnap.mousePressed(function () {
+      mgr.showScene(MorgenmadUI)
+      HideButtons();
+    })
+
+
+    FrokostKnap = createButton("Frokost")
+    FrokostKnap.position(125, 200);
+    FrokostKnap.size(100, 30);
+    FrokostKnap.style('background-color', '#ECC61A');
+    FrokostKnap.mousePressed(function () {
+      mgr.showScene(FrokostUI)
+      HideButtons();
+
+    })
+    AftensmadKnap = createButton("Aftensmad")
+    AftensmadKnap.position(125, 250);
+    AftensmadKnap.size(100, 30);
+    AftensmadKnap.style('background-color', '#ECC61A');
+    AftensmadKnap.mousePressed(function () {
+      mgr.showScene(AftensmadUI)
+      HideButtons();
+    })
+    SnackKnap = createButton("Snack")
+    SnackKnap.position(125, 300);
+    SnackKnap.size(100, 30);
+    SnackKnap.style('background-color', '#ECC61A');
+    SnackKnap.mousePressed(function () {
+      mgr.showScene(SnackUI)
+      HideButtons();
+    })
+
+    LigevægtsindtagKnap = createButton("Ligevægts beregner")
+    LigevægtsindtagKnap.position(220, 500);
+    LigevægtsindtagKnap.size(120, 40);
+    LigevægtsindtagKnap.style('background-color', '#FFFFFF');
+    LigevægtsindtagKnap.mousePressed(function () {
+      mgr.showScene(LigevægtsindtagUI)
+      HideButtons();
+    })
+
+    OpskrifterKnap = createButton("Opskrifter")
+    OpskrifterKnap.position(20, 500);
+    OpskrifterKnap.size(120, 40);
+    OpskrifterKnap.style('background-color', '#FFFFFF');
+    OpskrifterKnap.mousePressed(function () {
+      mgr.showScene(OpskrifterUI)
+      HideButtons();
+    })
+
+  } else {
+    MorgenmadKnap.show();
+    FrokostKnap.show();
+    AftensmadKnap.show();
+    SnackKnap.show();
+    LigevægtsindtagKnap.show();
+    OpskrifterKnap.show();
   }
 }
+
+//ksjuler alle elementer i denne scene (DASHBOARD)
+function HideButtons() {
+  MorgenmadKnap.hide();
+  FrokostKnap.hide();
+  AftensmadKnap.hide();
+  SnackKnap.hide();
+  LigevægtsindtagKnap.hide();
+  OpskrifterKnap.hide();
+}
+
 
 function OpskrifterUI() {
 
@@ -474,7 +468,7 @@ function MorgenmadUI() {
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
       TilføjButton.mousePressed(function () {
-        FinalCalories =+ MorCalories
+        FinalCalories = + MorCalories
       });
 
       ResultText = createElement('textarea', "Antal kcal: " + MorCalories);
@@ -546,7 +540,7 @@ function FrokostUI() {
       PastaButton.style('color', 'black');
       PastaButton.style('border', 'none');
       PastaButton.style('border-radius', '5px');
-      
+
       KyllingButton = createButton('Kylling');
       KyllingButton.position(25, 195);
       KyllingButton.size(290, 40);
