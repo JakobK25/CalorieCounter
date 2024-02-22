@@ -147,7 +147,7 @@ function OpskrifterUI() {
     searchInput = createInput();
     searchInput.position(25, 100);
     searchInput.size(285, 30);
-    searchInput.attribute('placeholder', 'Søg opskrift');
+    searchInput.attribute('placeholder', 'Søg i mine opskrifter');
 
     if (CancelButton == null) {
       CancelButton = createButton('Tilbage');
