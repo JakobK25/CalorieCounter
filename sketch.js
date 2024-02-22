@@ -129,7 +129,7 @@ function OpskrifterUI() {
 
 
     if (CancelButton == null) {
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -206,7 +206,7 @@ function BMIUI() {
       text("Højde (CM):", 60, 200);
       text("Vægt (KG):", 60, 130);
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(90, 460);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -328,7 +328,7 @@ function MorgenmadUI() {
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.mousePressed();
@@ -443,7 +443,7 @@ function FrokostUI() {
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -562,7 +562,7 @@ function AftensmadUI() {
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -676,7 +676,7 @@ function SnackUI() {
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
