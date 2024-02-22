@@ -13,7 +13,7 @@ function setup() {
   // SceneManager configuration
   mgr.addScene(Dashboard)
   mgr.addScene(OpskrifterUI)
-  mgr.addScene(BMIUI)
+  mgr.addScene(LigevægtsindtagUI)
   mgr.addScene(MorgenmadUI)
   mgr.addScene(FrokostUI)
   mgr.addScene(AftensmadUI)
@@ -43,7 +43,7 @@ function GetFoodData(name) {
 
 function Dashboard() {
   //alle elementer i Dashboard
-  let MorgenmadKnap, FrokostKnap, AftensmadKnap, SnackKnap, BMIKnap, OpskrifterKnap;
+  let MorgenmadKnap, FrokostKnap, AftensmadKnap, SnackKnap, LigevægtsindtagKnap, OpskrifterKnap;
 
   //SETUP funktionen der viser alle elementer
   this.enter = function () {
@@ -90,18 +90,18 @@ function Dashboard() {
         HideButtons();
       })
 
-      BMIKnap = createButton("BMI")
-      BMIKnap.position(230, 500);
-      BMIKnap.size(100, 30);
-      BMIKnap.style('background-color', '#FFFFFF');
-      BMIKnap.mousePressed(function () {
-        mgr.showScene(BMIUI)
+      LigevægtsindtagKnap = createButton("Ligevægts beregner")
+      LigevægtsindtagKnap.position(220, 500);
+      LigevægtsindtagKnap.size(120, 40);
+      LigevægtsindtagKnap.style('background-color', '#FFFFFF');
+      LigevægtsindtagKnap.mousePressed(function () {
+        mgr.showScene(LigevægtsindtagUI)
         HideButtons();
       })
 
       OpskrifterKnap = createButton("Opskrifter")
       OpskrifterKnap.position(20, 500);
-      OpskrifterKnap.size(100, 30);
+      OpskrifterKnap.size(120, 40);
       OpskrifterKnap.style('background-color', '#FFFFFF');
       OpskrifterKnap.mousePressed(function () {
         mgr.showScene(OpskrifterUI)
@@ -113,7 +113,7 @@ function Dashboard() {
       FrokostKnap.show();
       AftensmadKnap.show();
       SnackKnap.show();
-      BMIKnap.show();
+      LigevægtsindtagKnap.show();
       OpskrifterKnap.show();
     }
   }
@@ -124,7 +124,7 @@ function Dashboard() {
     FrokostKnap.hide();
     AftensmadKnap.hide();
     SnackKnap.hide();
-    BMIKnap.hide();
+    LigevægtsindtagKnap.hide();
     OpskrifterKnap.hide();
   }
 }
@@ -211,24 +211,24 @@ function OpskrifterUI() {
 
 
 
-function BMIUI() {
+function LigevægtsindtagUI() {
 
-  let vægtInput, højdeInput, beregnButton, resultText, CancelButton;
+  let vægtInput, højdeInput, alderInput, kønInput, beregnButton, resultText, CancelButton;
 
   this.enter = function () {
-    createCanvas(350, 550);
+    createCanvas(350, 600);
     background('#f0f0f0');
 
     textSize(26);
     textAlign(CENTER);
     fill('#333');
-    text("BMI Beregner", width / 2, 50);
+    text("Ligevægtsindtag Beregner", width / 2, 50);
 
     if (beregnButton == null) {
       beregnButton = createButton('Beregn');
-      beregnButton.position(30, 290);
-      beregnButton.size(290, 40);
-      beregnButton.mousePressed(beregnBMI);
+      beregnButton.position(250, 500);
+      beregnButton.size(80, 40);
+      beregnButton.mousePressed(beregnLigevægtsindtag);
       beregnButton.style('background-color', '#4CAF50');
       beregnButton.style('color', 'white');
       beregnButton.style('border', 'none');
@@ -246,33 +246,47 @@ function BMIUI() {
       højdeInput.attribute('type', 'number');
       højdeInput.style('border-radius', '5px');
 
+      alderInput = createInput();
+      alderInput.position(60, 280);
+      alderInput.size(230, 40);
+      alderInput.attribute('type', 'number');
+      alderInput.style('border-radius', '5px');
+
+      kønInput = createSelect();
+      kønInput.position(60, 350);
+      kønInput.option('Mand');
+      kønInput.option('Kvinde');
+      kønInput.style('border-radius', '5px');
+
       textAlign(LEFT);
       textSize(18);
       fill('#555');
       text("Højde (CM):", 60, 200);
       text("Vægt (KG):", 60, 130);
+      text("Alder (år):", 60, 270);
+      text("Køn:", 60, 340);
 
       CancelButton = createButton('Tilbage');
-      CancelButton.position(90, 460);
-      CancelButton.size(150, 40);
+      CancelButton.position(20, 500);
+      CancelButton.size(80, 40);
       CancelButton.style('background-color', 'red');
       CancelButton.style('color', 'black');
       CancelButton.style('border', 'none');
       CancelButton.style('border-radius', '5px');
       CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
+        mgr.showScene(Dashboard);
         HideButtons();
       })
 
-      resultText = createElement('textarea', "Dit BMI er:");
-      resultText.position(30, 360);
+      resultText = createElement('textarea', "Dit ligevægtsindtag er:");
+      resultText.position(30, 380);
       resultText.size(290, 80);
       resultText.attribute('readonly', 'true');
       resultText.style('font-size', '18px');
       resultText.style('background-color', '#ffffff');
       resultText.style('border', 'none');
       resultText.style('border-radius', '5px');
-      resultText.style('resize', 'none'); // Forhindrer ændring af størrelse
+      resultText.style('resize', 'none');
 
     } else {
       resultText.show();
@@ -280,6 +294,8 @@ function BMIUI() {
       beregnButton.show();
       vægtInput.show();
       højdeInput.show();
+      alderInput.show();
+      kønInput.show();
     }
   }
 
@@ -289,28 +305,26 @@ function BMIUI() {
     beregnButton.hide();
     vægtInput.hide();
     højdeInput.hide();
+    alderInput.hide();
+    kønInput.hide();
   }
 
-  function beregnBMI(){
-  let vægt = parseFloat(vægtInput.value());
-  let højde = parseFloat(højdeInput.value()) / 100; // Konverterer højde til meter
-  let bmi = vægt / (højde * højde);
-  resultText.value("Dit BMI er: " + bmi.toFixed(2));
+  function beregnLigevægtsindtag(){
+    let vægt = parseFloat(vægtInput.value());
+    let højde = parseFloat(højdeInput.value());
+    let alder = parseInt(alderInput.value());
+    let køn = kønInput.value();
 
-  let besked;
-  if (bmi < 18.5) {
-    besked = "Undervægtig";
-  } else if (bmi >= 18.5 && bmi < 25) {
-    besked = "Normalvægtig";
-  } else if (bmi >= 25 && bmi < 30) {
-    besked = "Overvægtig";
-  } else {
-    besked = "Svært overvægtig";
+    let ligevægtsindtag;
+
+    if (køn === 'Mand') {
+      ligevægtsindtag = 66.5 + (13.75 * vægt) + (5.003 * højde) - (6.755 * alder);
+    } else {
+      ligevægtsindtag = 655.1 + (9.563 * vægt) + (1.850 * højde) - (4.676 * alder);
+    }
+
+    resultText.value("Dit ligevægtsindtag er: " + ligevægtsindtag.toFixed(2) + " kcal pr. dag");
   }
-
-  // Opdater tekstfeltet med beskeden
-  resultText.value(resultText.value() + ". Du er " + besked);
-}
 }
 
 
