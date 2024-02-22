@@ -2,7 +2,7 @@ let mgr;
 let foodData;
 let FinalCalories = 0;
 
-function preload (){
+function preload() {
   foodData = loadJSON("https://stor.25nets.com/CalorieData.json")
 }
 
@@ -23,15 +23,15 @@ function setup() {
   mgr.showScene(Dashboard)
 
   console.log(GetFoodData("Skyr"));
-  
+
 }
 
 function draw() {
   mgr.draw()
 }
 
-function GetFoodData(name) { 
-  if (foodData != null) { 
+function GetFoodData(name) {
+  if (foodData != null) {
     for (let i = 0; i < foodData.foods.length; i++) {
       if (foodData.foods[i].name === name) {
         return foodData.foods[i];
@@ -51,6 +51,59 @@ function Dashboard() {
     console.log("Hello")
     createCanvas(350, 550);
     background(200);
+
+    //Kalorie opsumering på Dashboard:
+    let CalorieGoal; // Mål for kalorieindtag
+    let CurrentCalories = 0; // Aktuelt kalorieindtag
+    let radius = 100; // Cirkelradius
+
+    // Simuleret kalorieindtag (f.eks. fra en anden funktion)
+    let FinalCalorie = 0; // Kalorier indtaget i dette tidsinterval
+
+    function setup() {
+      createCanvas(400, 400);
+      CalorieGoal = createInput();
+
+    }
+
+    function draw() {
+      background(220);
+
+      // Opdater kalorier baseret på simulering
+      CurrentCalories += FinalCalorie;
+
+      // Beregn fyldningsgraden i grader
+      let CircleInFill = map(CurrentCalories, 0, CalorieGoal, 0, 360);
+
+      // Beregn procentdel af målet
+      let procentOpnået = CurrentCalories / CalorieGoal;
+
+      // Juster fyldningsgraden for at nå 360 grader ved 100%
+      if (procentOpnået >= 1) {
+        CircleInFill = 360;
+      }
+
+      // Beregn farve baseret på procentdel
+      let farveCirkle = lerpColor(color(255, 0, 0), color(0, 255, 0), procentOpnået);
+
+      // Tegn cirkel med variabel fyldning og farve
+      noFill();
+      strokeWeight(4);
+      stroke(50);
+      ellipse(200, 220, radius * 2, radius * 2);
+
+      fill(farveCirkle);
+      arc(200, 220, radius * 2, radius * 2, 0, radians(CircleInFill));
+
+      // Vis tekst med kalorier og procentdel
+      textSize(16);
+      textAlign(CENTER);
+      text(`${CurrentCalories} / ${CalorieGoal} Kalorier indtaget`, 200, 300 + 50);
+    }
+
+    function logMåltid(FinalCalorie, kalorier) {
+      FinalCalorie += kalorier;
+    }
 
     //laver alle elementer HVIS de ikke eksistere
     //vi tjekker om elementer eksistere ved at tjekke på om de er null
@@ -165,7 +218,7 @@ function OpskrifterUI() {
       TilføjButton.style('color', 'black');
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
-      
+
       MyOP1Button = createButton('Min personlige opskrift 1');
       MyOP1Button.position(25, 145);
       MyOP1Button.size(290, 40);
@@ -279,26 +332,26 @@ function BMIUI() {
     højdeInput.hide();
   }
 
-  function beregnBMI(){
-  let vægt = parseFloat(vægtInput.value());
-  let højde = parseFloat(højdeInput.value()) / 100; // Konverterer højde til meter
-  let bmi = vægt / (højde * højde);
-  resultText.value("Dit BMI er: " + bmi.toFixed(2));
+  function beregnBMI() {
+    let vægt = parseFloat(vægtInput.value());
+    let højde = parseFloat(højdeInput.value()) / 100; // Konverterer højde til meter
+    let bmi = vægt / (højde * højde);
+    resultText.value("Dit BMI er: " + bmi.toFixed(2));
 
-  let besked;
-  if (bmi < 18.5) {
-    besked = "Undervægtig";
-  } else if (bmi >= 18.5 && bmi < 25) {
-    besked = "Normalvægtig";
-  } else if (bmi >= 25 && bmi < 30) {
-    besked = "Overvægtig";
-  } else {
-    besked = "Svært overvægtig";
+    let besked;
+    if (bmi < 18.5) {
+      besked = "Undervægtig";
+    } else if (bmi >= 18.5 && bmi < 25) {
+      besked = "Normalvægtig";
+    } else if (bmi >= 25 && bmi < 30) {
+      besked = "Overvægtig";
+    } else {
+      besked = "Svært overvægtig";
+    }
+
+    // Opdater tekstfeltet med beskeden
+    resultText.value(resultText.value() + ". Du er " + besked);
   }
-
-  // Opdater tekstfeltet med beskeden
-  resultText.value(resultText.value() + ". Du er " + besked);
-}
 }
 
 function MorgenmadUI() {
