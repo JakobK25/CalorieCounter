@@ -125,11 +125,11 @@ function OpskrifterUI() {
     textSize(26);
     textAlign(CENTER);
     fill('#333');
-    text("Opskrifter", width / 2, 50);
+    text("Personlige opskrifter", width / 2, 50);
 
 
     if (CancelButton == null) {
-      CancelButton = createButton('Tilbage');
+      CancelButton = createButton('Cancel');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -149,19 +149,40 @@ function OpskrifterUI() {
       TilføjButton.style('color', 'black');
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
+      
+      MyOP1Button = createButton('Min personlige opskrift 1');
+      MyOP1Button.position(25, 95);
+      MyOP1Button.size(290, 40);
+      MyOP1Button.mousePressed();
+      MyOP1Button.style('background-color', 'pink');
+      MyOP1Button.style('color', 'black');
+      MyOP1Button.style('border', 'none');
+      MyOP1Button.style('border-radius', '5px');
 
-
+      MyOP2Button = createButton('Min pesonlige opskrift 2');
+      MyOP2Button.position(25, 145);
+      MyOP2Button.size(290, 40);
+      MyOP2Button.mousePressed();
+      MyOP2Button.style('background-color', 'pink');
+      MyOP2Button.style('color', 'black');
+      MyOP2Button.style('border', 'none');
+      MyOP2Button.style('border-radius', '5px');
 
     } else {
       CancelButton.show();
       TilføjButton.show();
+      MyOP2Button.show();
+      MyOP1Button.show();
     }
   }
   function HideButtons() {
     CancelButton.hide();
     TilføjButton.hide();
+    MyOP2Button.hide();
+    MyOP1Button.hide();
   }
 }
+
 
 
 
