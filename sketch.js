@@ -1,10 +1,12 @@
 let mgr;
+let foodData;
+
+function preload (){
+  foodData = loadJSON("https://stor.25nets.com/CalorieData.json")
+}
 
 function setup() {
   createCanvas(350, 550);
-
-  foodData = loadJSON("https://stor.25nets.com/CalorieData.json")
-  console.log(foodData)
 
   mgr = new SceneManager()
 
@@ -17,13 +19,26 @@ function setup() {
   mgr.addScene(AftensmadUI)
   mgr.addScene(SnackUI)
 
-
   mgr.showScene(Dashboard)
 
+  console.log(GetFoodData("Skyr"));
+  
 }
 
 function draw() {
   mgr.draw()
+}
+
+function GetFoodData(name) { 
+  if (foodData != null) { 
+    for (let i = 0; i < foodData.foods.length; i++) {
+      if (foodData.foods[i].name === name) {
+        return foodData.foods[i];
+      }
+    }
+  } else {
+    console.log("foodData is not loaded yet");
+  }
 }
 
 function Dashboard() {
