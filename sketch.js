@@ -3,6 +3,8 @@ let mgr;
 function setup() {
   createCanvas(350, 550);
 
+  foodData = loadJSON("https://stor.25nets.com/CalorieData.json")
+  console.log(foodData)
 
   mgr = new SceneManager()
 
