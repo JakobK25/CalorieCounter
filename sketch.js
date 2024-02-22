@@ -695,7 +695,7 @@ function SnackUI() {
       PBButton.style('border', 'none');
       PBButton.style('border-radius', '5px');
 
-      AndetButton = createButton('Andet');
+      AndetButton = createButton('Opskrifter');
       AndetButton.position(25, 295);
       AndetButton.size(290, 40);
       AndetButton.style('background-color', 'pink');
