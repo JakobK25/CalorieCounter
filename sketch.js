@@ -129,7 +129,7 @@ function OpskrifterUI() {
 
 
     if (CancelButton == null) {
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -151,7 +151,7 @@ function OpskrifterUI() {
       TilføjButton.style('border-radius', '5px');
       
       MyOP1Button = createButton('Min personlige opskrift 1');
-      MyOP1Button.position(25, 95);
+      MyOP1Button.position(25, 145);
       MyOP1Button.size(290, 40);
       MyOP1Button.mousePressed();
       MyOP1Button.style('background-color', 'pink');
@@ -160,10 +160,10 @@ function OpskrifterUI() {
       MyOP1Button.style('border-radius', '5px');
 
       MyOP2Button = createButton('Min pesonlige opskrift 2');
-      MyOP2Button.position(25, 145);
+      MyOP2Button.position(25, 205);
       MyOP2Button.size(290, 40);
       MyOP2Button.mousePressed();
-      MyOP2Button.style('background-color', 'pink');
+      MyOP2Button.style('background-color', 'pink')
       MyOP2Button.style('color', 'black');
       MyOP2Button.style('border', 'none');
       MyOP2Button.style('border-radius', '5px');
