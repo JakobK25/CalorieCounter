@@ -452,6 +452,7 @@ function MorgenmadUI() {
       AndetButton.style('border-radius', '5px');
       AndetButton.mousePressed(function () {
         mgr.showScene(OpskrifterUI);
+        HideButtons();
       });
 
       CancelButton = createButton('Tilbage');
