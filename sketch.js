@@ -140,7 +140,7 @@ function OpskrifterUI() {
     textSize(26);
     textAlign(CENTER);
     fill('#333');
-    text("Opskrifter", width / 2, 50);
+    text("Personlige opskrifter", width / 2, 50);
 
 
     if (CancelButton == null) {
@@ -164,19 +164,40 @@ function OpskrifterUI() {
       TilføjButton.style('color', 'black');
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
+      
+      MyOP1Button = createButton('Min personlige opskrift 1');
+      MyOP1Button.position(25, 95);
+      MyOP1Button.size(290, 40);
+      MyOP1Button.mousePressed();
+      MyOP1Button.style('background-color', 'pink');
+      MyOP1Button.style('color', 'black');
+      MyOP1Button.style('border', 'none');
+      MyOP1Button.style('border-radius', '5px');
 
-
+      MyOP2Button = createButton('Min pesonlige opskrift 2');
+      MyOP2Button.position(25, 145);
+      MyOP2Button.size(290, 40);
+      MyOP2Button.mousePressed();
+      MyOP2Button.style('background-color', 'pink');
+      MyOP2Button.style('color', 'black');
+      MyOP2Button.style('border', 'none');
+      MyOP2Button.style('border-radius', '5px');
 
     } else {
       CancelButton.show();
       TilføjButton.show();
+      MyOP2Button.show();
+      MyOP1Button.show();
     }
   }
   function HideButtons() {
     CancelButton.hide();
     TilføjButton.hide();
+    MyOP2Button.hide();
+    MyOP1Button.hide();
   }
 }
+
 
 
 
@@ -221,7 +242,7 @@ function BMIUI() {
       text("Højde (CM):", 60, 200);
       text("Vægt (KG):", 60, 130);
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(90, 460);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -334,16 +355,20 @@ function MorgenmadUI() {
       SmoothieButton.style('border', 'none');
       SmoothieButton.style('border-radius', '5px');
 
-      AndetButton = createButton('Andet');
+      AndetButton = createButton('Opskrifter');
       AndetButton.position(25, 295);
       AndetButton.size(290, 40);
       AndetButton.mousePressed();
-      AndetButton.style('background-color', 'red');
+      AndetButton.style('background-color', 'pink');
       AndetButton.style('color', 'black');
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
+      AndetButton.mousePressed(function () {
+        mgr.showScene(OpskrifterUI)
+        HideButtons();
+      })
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.mousePressed();
@@ -449,16 +474,19 @@ function FrokostUI() {
       ToastButton.style('border', 'none');
       ToastButton.style('border-radius', '5px');
 
-      AndetButton = createButton('Andet');
+      AndetButton = createButton('Opskrifter');
       AndetButton.position(25, 295);
       AndetButton.size(290, 40);
-      AndetButton.mousePressed();
-      AndetButton.style('background-color', 'red');
+      AndetButton.style('background-color', 'pink');
       AndetButton.style('color', 'black');
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
+      AndetButton.mousePressed(function () {
+        mgr.showScene(OpskrifterUI)
+        HideButtons();
+      })
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -534,10 +562,7 @@ function AftensmadUI() {
       KartoflerButton.style('color', 'black');
       KartoflerButton.style('border', 'none');
       KartoflerButton.style('border-radius', '5px');
-      KartoflerButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
+      KartoflerButton.mousePressed();
 
 
       BroccoliButton = createButton('Broccoli');
@@ -571,13 +596,16 @@ function AftensmadUI() {
       AndetButton = createButton('Andet');
       AndetButton.position(25, 295);
       AndetButton.size(290, 40);
-      AndetButton.mousePressed();
-      AndetButton.style('background-color', 'red');
+      AndetButton.style('background-color', 'pink');
       AndetButton.style('color', 'black');
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
+      AndetButton.mousePressed(function () {
+        mgr.showScene(OpskrifterUI)
+        HideButtons();
+      })
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
@@ -682,16 +710,19 @@ function SnackUI() {
       PBButton.style('border', 'none');
       PBButton.style('border-radius', '5px');
 
-      AndetButton = createButton('Andet');
+      AndetButton = createButton('Opskrifter');
       AndetButton.position(25, 295);
       AndetButton.size(290, 40);
-      AndetButton.mousePressed();
-      AndetButton.style('background-color', 'red');
+      AndetButton.style('background-color', 'pink');
       AndetButton.style('color', 'black');
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
+      AndetButton.mousePressed(function () {
+        mgr.showScene(OpskrifterUI)
+        HideButtons();
+      })
 
-      CancelButton = createButton('Cancel');
+      CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
       CancelButton.style('background-color', 'red');
