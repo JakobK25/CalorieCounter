@@ -14,7 +14,7 @@ function setup() {
   // SceneManager configuration
   mgr.addScene(Dashboard)
   mgr.addScene(OpskrifterUI)
-  mgr.addScene(BMIUI)
+  mgr.addScene(LigevægtsindtagUI)
   mgr.addScene(MorgenmadUI)
   mgr.addScene(FrokostUI)
   mgr.addScene(AftensmadUI)
@@ -44,7 +44,7 @@ function GetFoodData(name) {
 
 function Dashboard() {
   //alle elementer i Dashboard
-  let MorgenmadKnap, FrokostKnap, AftensmadKnap, SnackKnap, BMIKnap, OpskrifterKnap;
+  let MorgenmadKnap, FrokostKnap, AftensmadKnap, SnackKnap, LigevægtsindtagKnap, OpskrifterKnap;
 
   //SETUP funktionen der viser alle elementer
   this.enter = function () {
@@ -144,18 +144,18 @@ function Dashboard() {
         HideButtons();
       })
 
-      BMIKnap = createButton("BMI")
-      BMIKnap.position(230, 500);
-      BMIKnap.size(100, 30);
-      BMIKnap.style('background-color', '#FFFFFF');
-      BMIKnap.mousePressed(function () {
-        mgr.showScene(BMIUI)
+      LigevægtsindtagKnap = createButton("Ligevægts beregner")
+      LigevægtsindtagKnap.position(220, 500);
+      LigevægtsindtagKnap.size(120, 40);
+      LigevægtsindtagKnap.style('background-color', '#FFFFFF');
+      LigevægtsindtagKnap.mousePressed(function () {
+        mgr.showScene(LigevægtsindtagUI)
         HideButtons();
       })
 
       OpskrifterKnap = createButton("Opskrifter")
       OpskrifterKnap.position(20, 500);
-      OpskrifterKnap.size(100, 30);
+      OpskrifterKnap.size(120, 40);
       OpskrifterKnap.style('background-color', '#FFFFFF');
       OpskrifterKnap.mousePressed(function () {
         mgr.showScene(OpskrifterUI)
@@ -167,7 +167,7 @@ function Dashboard() {
       FrokostKnap.show();
       AftensmadKnap.show();
       SnackKnap.show();
-      BMIKnap.show();
+      LigevægtsindtagKnap.show();
       OpskrifterKnap.show();
     }
   }
@@ -178,7 +178,7 @@ function Dashboard() {
     FrokostKnap.hide();
     AftensmadKnap.hide();
     SnackKnap.hide();
-    BMIKnap.hide();
+    LigevægtsindtagKnap.hide();
     OpskrifterKnap.hide();
   }
 }
@@ -186,6 +186,7 @@ function Dashboard() {
 function OpskrifterUI() {
 
   let CancelButton, TilføjButton;
+  let searchInput; // Declare search input variable
 
   this.enter = function () {
     createCanvas(350, 550);
@@ -196,6 +197,11 @@ function OpskrifterUI() {
     fill('#333');
     text("Personlige opskrifter", width / 2, 50);
 
+    // Create search input field
+    searchInput = createInput();
+    searchInput.position(25, 100);
+    searchInput.size(285, 30);
+    searchInput.attribute('placeholder', 'Søg i mine opskrifter');
 
     if (CancelButton == null) {
       CancelButton = createButton('Tilbage');
@@ -220,7 +226,7 @@ function OpskrifterUI() {
       TilføjButton.style('border-radius', '5px');
 
       MyOP1Button = createButton('Min personlige opskrift 1');
-      MyOP1Button.position(25, 145);
+      MyOP1Button.position(25, 150);
       MyOP1Button.size(290, 40);
       MyOP1Button.mousePressed();
       MyOP1Button.style('background-color', 'pink');
@@ -229,7 +235,7 @@ function OpskrifterUI() {
       MyOP1Button.style('border-radius', '5px');
 
       MyOP2Button = createButton('Min pesonlige opskrift 2');
-      MyOP2Button.position(25, 205);
+      MyOP2Button.position(25, 210);
       MyOP2Button.size(290, 40);
       MyOP2Button.mousePressed();
       MyOP2Button.style('background-color', 'pink')
@@ -242,34 +248,49 @@ function OpskrifterUI() {
       TilføjButton.show();
       MyOP2Button.show();
       MyOP1Button.show();
+      searchInput.show();
     }
   }
+
   function HideButtons() {
     CancelButton.hide();
     TilføjButton.hide();
     MyOP2Button.hide();
     MyOP1Button.hide();
+    searchInput.hide();
   }
 }
 
-function BMIUI() {
 
-  let vægtInput, højdeInput, beregnButton, resultText, CancelButton;
+
+
+
+function LigevægtsindtagUI() {
+
+  let vægtInput, højdeInput, alderInput, kønInput, beregnButton, resultText, CancelButton;
 
   this.enter = function () {
-    createCanvas(350, 550);
+    createCanvas(350, 600);
     background('#f0f0f0');
+
+    textAlign(LEFT);
+    textSize(18);
+    fill('#555');
+    text("Højde (CM):", 60, 200);
+    text("Vægt (KG):", 60, 130);
+    text("Alder (år):", 60, 270);
+    text("Køn:", 60, 340);
 
     textSize(26);
     textAlign(CENTER);
     fill('#333');
-    text("BMI Beregner", width / 2, 50);
+    text("Ligevægtsindtag Beregner", width / 2, 50);
 
     if (beregnButton == null) {
       beregnButton = createButton('Beregn');
-      beregnButton.position(30, 290);
-      beregnButton.size(290, 40);
-      beregnButton.mousePressed(beregnBMI);
+      beregnButton.position(250, 500);
+      beregnButton.size(80, 40);
+      beregnButton.mousePressed(beregnLigevægtsindtag);
       beregnButton.style('background-color', '#4CAF50');
       beregnButton.style('color', 'white');
       beregnButton.style('border', 'none');
@@ -287,33 +308,39 @@ function BMIUI() {
       højdeInput.attribute('type', 'number');
       højdeInput.style('border-radius', '5px');
 
-      textAlign(LEFT);
-      textSize(18);
-      fill('#555');
-      text("Højde (CM):", 60, 200);
-      text("Vægt (KG):", 60, 130);
+      alderInput = createInput();
+      alderInput.position(60, 280);
+      alderInput.size(230, 40);
+      alderInput.attribute('type', 'number');
+      alderInput.style('border-radius', '5px');
+
+      kønInput = createSelect();
+      kønInput.position(60, 350);
+      kønInput.option('Mand');
+      kønInput.option('Kvinde');
+      kønInput.style('border-radius', '5px');
 
       CancelButton = createButton('Tilbage');
-      CancelButton.position(90, 460);
-      CancelButton.size(150, 40);
+      CancelButton.position(20, 500);
+      CancelButton.size(80, 40);
       CancelButton.style('background-color', 'red');
       CancelButton.style('color', 'black');
       CancelButton.style('border', 'none');
       CancelButton.style('border-radius', '5px');
       CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
+        mgr.showScene(Dashboard);
         HideButtons();
       })
 
-      resultText = createElement('textarea', "Dit BMI er:");
-      resultText.position(30, 360);
+      resultText = createElement('textarea', "Dit ligevægtsindtag er:");
+      resultText.position(30, 380);
       resultText.size(290, 80);
       resultText.attribute('readonly', 'true');
       resultText.style('font-size', '18px');
       resultText.style('background-color', '#ffffff');
       resultText.style('border', 'none');
       resultText.style('border-radius', '5px');
-      resultText.style('resize', 'none'); // Forhindrer ændring af størrelse
+      resultText.style('resize', 'none');
 
     } else {
       resultText.show();
@@ -321,6 +348,8 @@ function BMIUI() {
       beregnButton.show();
       vægtInput.show();
       højdeInput.show();
+      alderInput.show();
+      kønInput.show();
     }
   }
 
@@ -330,33 +359,35 @@ function BMIUI() {
     beregnButton.hide();
     vægtInput.hide();
     højdeInput.hide();
+    alderInput.hide();
+    kønInput.hide();
   }
 
-  function beregnBMI() {
-    let vægt = parseFloat(vægtInput.value());
-    let højde = parseFloat(højdeInput.value()) / 100; // Konverterer højde til meter
-    let bmi = vægt / (højde * højde);
-    resultText.value("Dit BMI er: " + bmi.toFixed(2));
+  function beregnBMI(){
+  let vægt = parseFloat(vægtInput.value());
+  let højde = parseFloat(højdeInput.value()) / 100; // Konverterer højde til meter
+  let bmi = vægt / (højde * højde);
+  resultText.value("Dit BMI er: " + bmi.toFixed(2));
 
-    let besked;
-    if (bmi < 18.5) {
-      besked = "Undervægtig";
-    } else if (bmi >= 18.5 && bmi < 25) {
-      besked = "Normalvægtig";
-    } else if (bmi >= 25 && bmi < 30) {
-      besked = "Overvægtig";
-    } else {
-      besked = "Svært overvægtig";
-    }
-
-    // Opdater tekstfeltet med beskeden
-    resultText.value(resultText.value() + ". Du er " + besked);
+  let besked;
+  if (bmi < 18.5) {
+    besked = "Undervægtig";
+  } else if (bmi >= 18.5 && bmi < 25) {
+    besked = "Normalvægtig";
+  } else if (bmi >= 25 && bmi < 30) {
+    besked = "Overvægtig";
+  } else {
+    besked = "Svært overvægtig";
   }
+
+  // Opdater tekstfeltet med beskeden
+  resultText.value(resultText.value() + ". Du er " + besked);
+}
 }
 
 function MorgenmadUI() {
-  let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText
-  let MorCalories = 0
+  let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText;
+  let MorCalories = 0;
 
   this.enter = function () {
     createCanvas(350, 550);
@@ -368,126 +399,123 @@ function MorgenmadUI() {
     text("Morgenmad", width / 2, 50);
 
     if (SkyrButton == null) {
-
       SkyrButton = createButton('Skyr');
       SkyrButton.position(25, 95);
       SkyrButton.size(290, 40);
-      SkyrButton.mousePressed();
       SkyrButton.style('background-color', 'yellow');
       SkyrButton.style('color', 'black');
       SkyrButton.style('border', 'none');
       SkyrButton.style('border-radius', '5px');
       SkyrButton.mousePressed(function () {
         MorCalories += GetFoodData("Skyr").calories;
-        console.log(MorCalories)
-      })
+        updateResultText();
+      });
 
       BananButton = createButton('Banan');
       BananButton.position(25, 145);
       BananButton.size(290, 40);
-      BananButton.mousePressed();
       BananButton.style('background-color', 'yellow');
       BananButton.style('color', 'black');
       BananButton.style('border', 'none');
       BananButton.style('border-radius', '5px');
       BananButton.mousePressed(function () {
         MorCalories += GetFoodData("Banan").calories;
-      })
+        updateResultText();
+      });
 
       BollerButton = createButton('Boller');
       BollerButton.position(25, 195);
       BollerButton.size(290, 40);
-      BollerButton.mousePressed();
       BollerButton.style('background-color', 'yellow');
       BollerButton.style('color', 'black');
       BollerButton.style('border', 'none');
       BollerButton.style('border-radius', '5px');
       BollerButton.mousePressed(function () {
         MorCalories += GetFoodData("Boller").calories;
-      })
+        updateResultText();
+      });
 
       SmoothieButton = createButton('Smoothie');
       SmoothieButton.position(25, 245);
       SmoothieButton.size(290, 40);
-      SmoothieButton.mousePressed();
       SmoothieButton.style('background-color', 'green');
       SmoothieButton.style('color', 'black');
       SmoothieButton.style('border', 'none');
       SmoothieButton.style('border-radius', '5px');
       SmoothieButton.mousePressed(function () {
         MorCalories += GetFoodData("Smoothie").calories;
-      })
+        updateResultText();
+      });
 
       AndetButton = createButton('Opskrifter');
       AndetButton.position(25, 295);
       AndetButton.size(290, 40);
-      AndetButton.mousePressed();
       AndetButton.style('background-color', 'pink');
       AndetButton.style('color', 'black');
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
       AndetButton.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
+        mgr.showScene(OpskrifterUI);
+      });
 
       CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
-      CancelButton.mousePressed();
       CancelButton.style('background-color', 'red');
       CancelButton.style('color', 'black');
       CancelButton.style('border', 'none');
       CancelButton.style('border-radius', '5px');
-
       CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
+        mgr.showScene(Dashboard);
+        HideButtons()
+      });
 
       TilføjButton = createButton('Tilføj');
       TilføjButton.position(180, 395);
       TilføjButton.size(150, 40);
-      TilføjButton.mousePressed();
       TilføjButton.style('background-color', 'green');
       TilføjButton.style('color', 'black');
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
       TilføjButton.mousePressed(function () {
-        FinalCalories += MorCalories;
-      })
+        FinalCalories =+ MorCalories
+      });
 
-      ResultText = createElement('textarea', "Antal kcal:");
+      ResultText = createElement('textarea', "Antal kcal: " + MorCalories);
       ResultText.position(30, 450);
       ResultText.size(290, 80);
-      ResultText.attribute('readonly', 'true');
+      ResultText.attribute('readonly', true);
       ResultText.style('font-size', '18px');
       ResultText.style('background-color', '#ffffff');
       ResultText.style('border', 'none');
       ResultText.style('border-radius', '5px');
       ResultText.style('resize', 'none');
 
-    }
-    else {
-      SkyrButton.show()
-      BananButton.show()
-      BollerButton.show()
-      SmoothieButton.show()
-      AndetButton.show()
-      CancelButton.show()
-      TilføjButton.show()
-      ResultText.show()
+    } else {
+      SkyrButton.show();
+      BananButton.show();
+      BollerButton.show();
+      SmoothieButton.show();
+      AndetButton.show();
+      CancelButton.show();
+      TilføjButton.show();
+      ResultText.show();
     }
   }
+
+  function updateResultText() {
+    ResultText.value("Antal kcal: " + MorCalories); // Update the displayed calories
+  }
+
   function HideButtons() {
-    SkyrButton.hide()
-    BananButton.hide()
-    BollerButton.hide()
-    SmoothieButton.hide()
-    AndetButton.hide()
-    CancelButton.hide()
-    TilføjButton.hide()
-    ResultText.hide()
+    SkyrButton.hide();
+    BananButton.hide();
+    BollerButton.hide();
+    SmoothieButton.hide();
+    AndetButton.hide();
+    CancelButton.hide();
+    TilføjButton.hide();
+    ResultText.hide();
   }
 }
 
@@ -841,8 +869,5 @@ function SnackUI() {
     SkyrButton.hide();
     TilføjButton.hide();
     CancelButton.hide();
-
-
-
   }
 }
