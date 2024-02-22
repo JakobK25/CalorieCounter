@@ -194,6 +194,7 @@ function OpskrifterUI() {
       TilføjButton.show();
       MyOP2Button.show();
       MyOP1Button.show();
+      searchInput.show();
     }
   }
 
@@ -202,6 +203,7 @@ function OpskrifterUI() {
     TilføjButton.hide();
     MyOP2Button.hide();
     MyOP1Button.hide();
+    searchInput.hide();
   }
 }
 
