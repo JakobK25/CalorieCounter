@@ -2,7 +2,7 @@ let mgr;
 let foodData;
 let FinalCalories = 0;
 
-function preload (){
+function preload() {
   foodData = loadJSON("https://stor.25nets.com/CalorieData.json")
 }
 
@@ -23,15 +23,15 @@ function setup() {
   mgr.showScene(Dashboard)
 
   console.log(GetFoodData("Skyr"));
-  
+
 }
 
 function draw() {
   mgr.draw()
 }
 
-function GetFoodData(name) { 
-  if (foodData != null) { 
+function GetFoodData(name) {
+  if (foodData != null) {
     for (let i = 0; i < foodData.foods.length; i++) {
       if (foodData.foods[i].name === name) {
         return foodData.foods[i];
@@ -171,7 +171,7 @@ function OpskrifterUI() {
       TilføjButton.style('color', 'black');
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
-      
+
       MyOP1Button = createButton('Min personlige opskrift 1');
       MyOP1Button.position(25, 150);
       MyOP1Button.size(290, 40);
@@ -219,7 +219,7 @@ function LigevægtsindtagUI() {
   this.enter = function () {
     createCanvas(350, 600);
     background('#f0f0f0');
-    
+
     textAlign(LEFT);
     textSize(18);
     fill('#555');
@@ -310,7 +310,7 @@ function LigevægtsindtagUI() {
     kønInput.hide();
   }
 
-  function beregnLigevægtsindtag(){
+  function beregnLigevægtsindtag() {
     let vægt = parseFloat(vægtInput.value());
     let højde = parseFloat(højdeInput.value());
     let alder = parseInt(alderInput.value());
@@ -329,8 +329,8 @@ function LigevægtsindtagUI() {
 }
 
 function MorgenmadUI() {
-  let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText
-  let MorCalories = 0
+  let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText;
+  let MorCalories = 0;
 
   this.enter = function () {
     createCanvas(350, 550);
@@ -342,126 +342,123 @@ function MorgenmadUI() {
     text("Morgenmad", width / 2, 50);
 
     if (SkyrButton == null) {
-
       SkyrButton = createButton('Skyr');
       SkyrButton.position(25, 95);
       SkyrButton.size(290, 40);
-      SkyrButton.mousePressed();
       SkyrButton.style('background-color', 'yellow');
       SkyrButton.style('color', 'black');
       SkyrButton.style('border', 'none');
       SkyrButton.style('border-radius', '5px');
       SkyrButton.mousePressed(function () {
         MorCalories += GetFoodData("Skyr").calories;
-        console.log(MorCalories)
-      })
+        updateResultText();
+      });
 
       BananButton = createButton('Banan');
       BananButton.position(25, 145);
       BananButton.size(290, 40);
-      BananButton.mousePressed();
       BananButton.style('background-color', 'yellow');
       BananButton.style('color', 'black');
       BananButton.style('border', 'none');
       BananButton.style('border-radius', '5px');
       BananButton.mousePressed(function () {
         MorCalories += GetFoodData("Banan").calories;
-      })
+        updateResultText();
+      });
 
       BollerButton = createButton('Boller');
       BollerButton.position(25, 195);
       BollerButton.size(290, 40);
-      BollerButton.mousePressed();
       BollerButton.style('background-color', 'yellow');
       BollerButton.style('color', 'black');
       BollerButton.style('border', 'none');
       BollerButton.style('border-radius', '5px');
       BollerButton.mousePressed(function () {
         MorCalories += GetFoodData("Boller").calories;
-      })
+        updateResultText();
+      });
 
       SmoothieButton = createButton('Smoothie');
       SmoothieButton.position(25, 245);
       SmoothieButton.size(290, 40);
-      SmoothieButton.mousePressed();
       SmoothieButton.style('background-color', 'green');
       SmoothieButton.style('color', 'black');
       SmoothieButton.style('border', 'none');
       SmoothieButton.style('border-radius', '5px');
       SmoothieButton.mousePressed(function () {
         MorCalories += GetFoodData("Smoothie").calories;
-      })
+        updateResultText();
+      });
 
       AndetButton = createButton('Opskrifter');
       AndetButton.position(25, 295);
       AndetButton.size(290, 40);
-      AndetButton.mousePressed();
       AndetButton.style('background-color', 'pink');
       AndetButton.style('color', 'black');
       AndetButton.style('border', 'none');
       AndetButton.style('border-radius', '5px');
       AndetButton.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
+        mgr.showScene(OpskrifterUI);
+      });
 
       CancelButton = createButton('Tilbage');
       CancelButton.position(15, 395);
       CancelButton.size(150, 40);
-      CancelButton.mousePressed();
       CancelButton.style('background-color', 'red');
       CancelButton.style('color', 'black');
       CancelButton.style('border', 'none');
       CancelButton.style('border-radius', '5px');
-
       CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
+        mgr.showScene(Dashboard);
+        HideButtons()
+      });
 
       TilføjButton = createButton('Tilføj');
       TilføjButton.position(180, 395);
       TilføjButton.size(150, 40);
-      TilføjButton.mousePressed();
       TilføjButton.style('background-color', 'green');
       TilføjButton.style('color', 'black');
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
       TilføjButton.mousePressed(function () {
-        FinalCalories += MorCalories;
-      })
+        FinalCalories =+ MorCalories
+      });
 
-      ResultText = createElement('textarea', "Antal kcal:");
+      ResultText = createElement('textarea', "Antal kcal: " + MorCalories);
       ResultText.position(30, 450);
       ResultText.size(290, 80);
-      ResultText.attribute('readonly', 'true');
+      ResultText.attribute('readonly', true);
       ResultText.style('font-size', '18px');
       ResultText.style('background-color', '#ffffff');
       ResultText.style('border', 'none');
       ResultText.style('border-radius', '5px');
       ResultText.style('resize', 'none');
 
-    }
-    else {
-      SkyrButton.show()
-      BananButton.show()
-      BollerButton.show()
-      SmoothieButton.show()
-      AndetButton.show()
-      CancelButton.show()
-      TilføjButton.show()
-      ResultText.show()
+    } else {
+      SkyrButton.show();
+      BananButton.show();
+      BollerButton.show();
+      SmoothieButton.show();
+      AndetButton.show();
+      CancelButton.show();
+      TilføjButton.show();
+      ResultText.show();
     }
   }
+
+  function updateResultText() {
+    ResultText.value("Antal kcal: " + MorCalories); // Update the displayed calories
+  }
+
   function HideButtons() {
-    SkyrButton.hide()
-    BananButton.hide()
-    BollerButton.hide()
-    SmoothieButton.hide()
-    AndetButton.hide()
-    CancelButton.hide()
-    TilføjButton.hide()
-    ResultText.hide()
+    SkyrButton.hide();
+    BananButton.hide();
+    BollerButton.hide();
+    SmoothieButton.hide();
+    AndetButton.hide();
+    CancelButton.hide();
+    TilføjButton.hide();
+    ResultText.hide();
   }
 }
 
@@ -815,8 +812,5 @@ function SnackUI() {
     SkyrButton.hide();
     TilføjButton.hide();
     CancelButton.hide();
-
-
-
   }
 }
