@@ -264,10 +264,9 @@ function OpskrifterUI() {
 
 
 
-
 function LigevægtsindtagUI() {
 
-  let vægtInput, højdeInput, alderInput, kønInput, beregnButton, resultText, CancelButton;
+  let vægtInput, højdeInput, alderInput, kønInput, beregnButton, resultText, resetButton, CancelButton;
 
   this.enter = function () {
     createCanvas(350, 600);
@@ -295,6 +294,15 @@ function LigevægtsindtagUI() {
       beregnButton.style('color', 'white');
       beregnButton.style('border', 'none');
       beregnButton.style('border-radius', '5px');
+
+      resetButton = createButton('Nulstil');
+      resetButton.position(135, 500);
+      resetButton.size(80, 40);
+      resetButton.style('background-color', 'orange');
+      resetButton.style('color', 'black');
+      resetButton.style('border', 'none');
+      resetButton.style('border-radius', '5px');
+      resetButton.mousePressed(reset);
 
       vægtInput = createInput();
       vægtInput.position(60, 140);
@@ -350,6 +358,7 @@ function LigevægtsindtagUI() {
       højdeInput.show();
       alderInput.show();
       kønInput.show();
+      resetButton.show();
     }
   }
 
@@ -361,6 +370,7 @@ function LigevægtsindtagUI() {
     højdeInput.hide();
     alderInput.hide();
     kønInput.hide();
+    resetButton.hide();
   }
 
   function beregnLigevægtsindtag() {
@@ -379,492 +389,504 @@ function LigevægtsindtagUI() {
 
     resultText.value("Dit ligevægtsindtag er: " + ligevægtsindtag.toFixed(2) + " kcal pr. dag");
   }
+
+  function reset() {
+    // Nulstil værdierne i inputfelterne og resultatfeltet
+    vægtInput.value("");
+    højdeInput.value("");
+    alderInput.value("");
+    resultText.value("Dit ligevægtsindtag er:");
+  }
 }
 
-function MorgenmadUI() {
-  let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText;
-  let MorCalories = 0;
 
-  this.enter = function () {
-    createCanvas(350, 550);
-    background('#f0f0f0');
+  
 
-    textSize(26);
-    textAlign(CENTER);
-    fill('#333');
-    text("Morgenmad", width / 2, 50);
 
-    if (SkyrButton == null) {
-      SkyrButton = createButton('Skyr');
-      SkyrButton.position(25, 95);
-      SkyrButton.size(290, 40);
-      SkyrButton.style('background-color', 'yellow');
-      SkyrButton.style('color', 'black');
-      SkyrButton.style('border', 'none');
-      SkyrButton.style('border-radius', '5px');
-      SkyrButton.mousePressed(function () {
-        MorCalories += GetFoodData("Skyr").calories;
-        updateResultText();
-      });
+  function MorgenmadUI() {
+    let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText;
+    let MorCalories = 0;
 
-      BananButton = createButton('Banan');
-      BananButton.position(25, 145);
-      BananButton.size(290, 40);
-      BananButton.style('background-color', 'yellow');
-      BananButton.style('color', 'black');
-      BananButton.style('border', 'none');
-      BananButton.style('border-radius', '5px');
-      BananButton.mousePressed(function () {
-        MorCalories += GetFoodData("Banan").calories;
-        updateResultText();
-      });
+    this.enter = function () {
+      createCanvas(350, 550);
+      background('#f0f0f0');
 
-      BollerButton = createButton('Boller');
-      BollerButton.position(25, 195);
-      BollerButton.size(290, 40);
-      BollerButton.style('background-color', 'yellow');
-      BollerButton.style('color', 'black');
-      BollerButton.style('border', 'none');
-      BollerButton.style('border-radius', '5px');
-      BollerButton.mousePressed(function () {
-        MorCalories += GetFoodData("Boller").calories;
-        updateResultText();
-      });
+      textSize(26);
+      textAlign(CENTER);
+      fill('#333');
+      text("Morgenmad", width / 2, 50);
 
-      SmoothieButton = createButton('Smoothie');
-      SmoothieButton.position(25, 245);
-      SmoothieButton.size(290, 40);
-      SmoothieButton.style('background-color', 'green');
-      SmoothieButton.style('color', 'black');
-      SmoothieButton.style('border', 'none');
-      SmoothieButton.style('border-radius', '5px');
-      SmoothieButton.mousePressed(function () {
-        MorCalories += GetFoodData("Smoothie").calories;
-        updateResultText();
-      });
+      if (SkyrButton == null) {
+        SkyrButton = createButton('Skyr');
+        SkyrButton.position(25, 95);
+        SkyrButton.size(290, 40);
+        SkyrButton.style('background-color', 'yellow');
+        SkyrButton.style('color', 'black');
+        SkyrButton.style('border', 'none');
+        SkyrButton.style('border-radius', '5px');
+        SkyrButton.mousePressed(function () {
+          MorCalories += GetFoodData("Skyr").calories;
+          updateResultText();
+        });
 
-      AndetButton = createButton('Opskrifter');
-      AndetButton.position(25, 295);
-      AndetButton.size(290, 40);
-      AndetButton.style('background-color', 'pink');
-      AndetButton.style('color', 'black');
-      AndetButton.style('border', 'none');
-      AndetButton.style('border-radius', '5px');
-      AndetButton.mousePressed(function () {
-        mgr.showScene(OpskrifterUI);
-        HideButtons();
-      });
+        BananButton = createButton('Banan');
+        BananButton.position(25, 145);
+        BananButton.size(290, 40);
+        BananButton.style('background-color', 'yellow');
+        BananButton.style('color', 'black');
+        BananButton.style('border', 'none');
+        BananButton.style('border-radius', '5px');
+        BananButton.mousePressed(function () {
+          MorCalories += GetFoodData("Banan").calories;
+          updateResultText();
+        });
 
-      CancelButton = createButton('Tilbage');
-      CancelButton.position(15, 395);
-      CancelButton.size(150, 40);
-      CancelButton.style('background-color', 'red');
-      CancelButton.style('color', 'black');
-      CancelButton.style('border', 'none');
-      CancelButton.style('border-radius', '5px');
-      CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard);
-        HideButtons()
-      });
+        BollerButton = createButton('Boller');
+        BollerButton.position(25, 195);
+        BollerButton.size(290, 40);
+        BollerButton.style('background-color', 'yellow');
+        BollerButton.style('color', 'black');
+        BollerButton.style('border', 'none');
+        BollerButton.style('border-radius', '5px');
+        BollerButton.mousePressed(function () {
+          MorCalories += GetFoodData("Boller").calories;
+          updateResultText();
+        });
 
-      TilføjButton = createButton('Tilføj');
-      TilføjButton.position(180, 395);
-      TilføjButton.size(150, 40);
-      TilføjButton.style('background-color', 'green');
-      TilføjButton.style('color', 'black');
-      TilføjButton.style('border', 'none');
-      TilføjButton.style('border-radius', '5px');
-      TilføjButton.mousePressed(function () {
-        FinalCalories =+ MorCalories
-      });
+        SmoothieButton = createButton('Smoothie');
+        SmoothieButton.position(25, 245);
+        SmoothieButton.size(290, 40);
+        SmoothieButton.style('background-color', 'green');
+        SmoothieButton.style('color', 'black');
+        SmoothieButton.style('border', 'none');
+        SmoothieButton.style('border-radius', '5px');
+        SmoothieButton.mousePressed(function () {
+          MorCalories += GetFoodData("Smoothie").calories;
+          updateResultText();
+        });
 
-      ResultText = createElement('textarea', "Antal kcal: " + MorCalories);
-      ResultText.position(30, 450);
-      ResultText.size(290, 80);
-      ResultText.attribute('readonly', true);
-      ResultText.style('font-size', '18px');
-      ResultText.style('background-color', '#ffffff');
-      ResultText.style('border', 'none');
-      ResultText.style('border-radius', '5px');
-      ResultText.style('resize', 'none');
+        AndetButton = createButton('Opskrifter');
+        AndetButton.position(25, 295);
+        AndetButton.size(290, 40);
+        AndetButton.style('background-color', 'pink');
+        AndetButton.style('color', 'black');
+        AndetButton.style('border', 'none');
+        AndetButton.style('border-radius', '5px');
+        AndetButton.mousePressed(function () {
+          mgr.showScene(OpskrifterUI);
+          HideButtons();
+        });
 
-    } else {
-      SkyrButton.show();
-      BananButton.show();
-      BollerButton.show();
-      SmoothieButton.show();
-      AndetButton.show();
-      CancelButton.show();
-      TilføjButton.show();
-      ResultText.show();
+        CancelButton = createButton('Tilbage');
+        CancelButton.position(15, 395);
+        CancelButton.size(150, 40);
+        CancelButton.style('background-color', 'red');
+        CancelButton.style('color', 'black');
+        CancelButton.style('border', 'none');
+        CancelButton.style('border-radius', '5px');
+        CancelButton.mousePressed(function () {
+          mgr.showScene(Dashboard);
+          HideButtons()
+        });
+
+        TilføjButton = createButton('Tilføj');
+        TilføjButton.position(180, 395);
+        TilføjButton.size(150, 40);
+        TilføjButton.style('background-color', 'green');
+        TilføjButton.style('color', 'black');
+        TilføjButton.style('border', 'none');
+        TilføjButton.style('border-radius', '5px');
+        TilføjButton.mousePressed(function () {
+          FinalCalories = + MorCalories
+        });
+
+        ResultText = createElement('textarea', "Antal kcal: " + MorCalories);
+        ResultText.position(30, 450);
+        ResultText.size(290, 80);
+        ResultText.attribute('readonly', true);
+        ResultText.style('font-size', '18px');
+        ResultText.style('background-color', '#ffffff');
+        ResultText.style('border', 'none');
+        ResultText.style('border-radius', '5px');
+        ResultText.style('resize', 'none');
+
+      } else {
+        SkyrButton.show();
+        BananButton.show();
+        BollerButton.show();
+        SmoothieButton.show();
+        AndetButton.show();
+        CancelButton.show();
+        TilføjButton.show();
+        ResultText.show();
+      }
+    }
+
+    function updateResultText() {
+      ResultText.value("Antal kcal: " + MorCalories); // Update the displayed calories
+    }
+
+    function HideButtons() {
+      SkyrButton.hide();
+      BananButton.hide();
+      BollerButton.hide();
+      SmoothieButton.hide();
+      AndetButton.hide();
+      CancelButton.hide();
+      TilføjButton.hide();
+      ResultText.hide();
     }
   }
 
-  function updateResultText() {
-    ResultText.value("Antal kcal: " + MorCalories); // Update the displayed calories
-  }
+  function FrokostUI() {
 
-  function HideButtons() {
-    SkyrButton.hide();
-    BananButton.hide();
-    BollerButton.hide();
-    SmoothieButton.hide();
-    AndetButton.hide();
-    CancelButton.hide();
-    TilføjButton.hide();
-    ResultText.hide();
-  }
-}
+    let RisButton, PastaButton, KyllingButton, ToastButton, AndetButton, CancelButton, TilføjButton
 
-function FrokostUI() {
+    this.enter = function () {
+      createCanvas(350, 550);
+      background('#f0f0f0');
 
-  let RisButton, PastaButton, KyllingButton, ToastButton, AndetButton, CancelButton, TilføjButton
-
-  this.enter = function () {
-    createCanvas(350, 550);
-    background('#f0f0f0');
-
-    textSize(26);
-    textAlign(CENTER);
-    fill('#333');
-    text("Frokost", width / 2, 50);
+      textSize(26);
+      textAlign(CENTER);
+      fill('#333');
+      text("Frokost", width / 2, 50);
 
 
-    if (RisButton == null) {
-      RisButton = createButton('Ris');
-      RisButton.position(25, 95);
-      RisButton.size(290, 40);
-      RisButton.style('background-color', 'yellow');
-      RisButton.style('color', 'black');
-      RisButton.style('border', 'none');
-      RisButton.style('border-radius', '5px');
+      if (RisButton == null) {
+        RisButton = createButton('Ris');
+        RisButton.position(25, 95);
+        RisButton.size(290, 40);
+        RisButton.style('background-color', 'yellow');
+        RisButton.style('color', 'black');
+        RisButton.style('border', 'none');
+        RisButton.style('border-radius', '5px');
 
-      PastaButton = createButton('Pasta');
-      PastaButton.position(25, 145);
-      PastaButton.size(290, 40);
-      PastaButton.mousePressed();
-      PastaButton.style('background-color', 'yellow');
-      PastaButton.style('color', 'black');
-      PastaButton.style('border', 'none');
-      PastaButton.style('border-radius', '5px');
-      
-      KyllingButton = createButton('Kylling');
-      KyllingButton.position(25, 195);
-      KyllingButton.size(290, 40);
-      KyllingButton.mousePressed();
-      KyllingButton.style('background-color', 'yellow');
-      KyllingButton.style('color', 'black');
-      KyllingButton.style('border', 'none');
-      KyllingButton.style('border-radius', '5px');
+        PastaButton = createButton('Pasta');
+        PastaButton.position(25, 145);
+        PastaButton.size(290, 40);
+        PastaButton.mousePressed();
+        PastaButton.style('background-color', 'yellow');
+        PastaButton.style('color', 'black');
+        PastaButton.style('border', 'none');
+        PastaButton.style('border-radius', '5px');
 
-      ToastButton = createButton('Toast');
-      ToastButton.position(25, 245);
-      ToastButton.size(290, 40);
-      ToastButton.mousePressed();
-      ToastButton.style('background-color', 'green');
-      ToastButton.style('color', 'black');
-      ToastButton.style('border', 'none');
-      ToastButton.style('border-radius', '5px');
+        KyllingButton = createButton('Kylling');
+        KyllingButton.position(25, 195);
+        KyllingButton.size(290, 40);
+        KyllingButton.mousePressed();
+        KyllingButton.style('background-color', 'yellow');
+        KyllingButton.style('color', 'black');
+        KyllingButton.style('border', 'none');
+        KyllingButton.style('border-radius', '5px');
 
-      AndetButton = createButton('Opskrifter');
-      AndetButton.position(25, 295);
-      AndetButton.size(290, 40);
-      AndetButton.style('background-color', 'pink');
-      AndetButton.style('color', 'black');
-      AndetButton.style('border', 'none');
-      AndetButton.style('border-radius', '5px');
-      AndetButton.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
+        ToastButton = createButton('Toast');
+        ToastButton.position(25, 245);
+        ToastButton.size(290, 40);
+        ToastButton.mousePressed();
+        ToastButton.style('background-color', 'green');
+        ToastButton.style('color', 'black');
+        ToastButton.style('border', 'none');
+        ToastButton.style('border-radius', '5px');
 
-      CancelButton = createButton('Tilbage');
-      CancelButton.position(15, 395);
-      CancelButton.size(150, 40);
-      CancelButton.style('background-color', 'red');
-      CancelButton.style('color', 'black');
-      CancelButton.style('border', 'none');
-      CancelButton.style('border-radius', '5px');
-      CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
+        AndetButton = createButton('Opskrifter');
+        AndetButton.position(25, 295);
+        AndetButton.size(290, 40);
+        AndetButton.style('background-color', 'pink');
+        AndetButton.style('color', 'black');
+        AndetButton.style('border', 'none');
+        AndetButton.style('border-radius', '5px');
+        AndetButton.mousePressed(function () {
+          mgr.showScene(OpskrifterUI)
+          HideButtons();
+        })
 
-      TilføjButton = createButton('Tilføj');
-      TilføjButton.position(180, 395);
-      TilføjButton.size(150, 40);
-      TilføjButton.mousePressed();
-      TilføjButton.style('background-color', 'green');
-      TilføjButton.style('color', 'black');
-      TilføjButton.style('border', 'none');
-      TilføjButton.style('border-radius', '5px');
+        CancelButton = createButton('Tilbage');
+        CancelButton.position(15, 395);
+        CancelButton.size(150, 40);
+        CancelButton.style('background-color', 'red');
+        CancelButton.style('color', 'black');
+        CancelButton.style('border', 'none');
+        CancelButton.style('border-radius', '5px');
+        CancelButton.mousePressed(function () {
+          mgr.showScene(Dashboard)
+          HideButtons();
+        })
 
-      resultText = createElement('textarea', "Antal kcal:");
-      resultText.position(30, 450);
-      resultText.size(290, 80);
-      resultText.attribute('readonly', 'true');
-      resultText.style('font-size', '18px');
-      resultText.style('background-color', '#ffffff');
-      resultText.style('border', 'none');
-      resultText.style('border-radius', '5px');
-      resultText.style('resize', 'none');
+        TilføjButton = createButton('Tilføj');
+        TilføjButton.position(180, 395);
+        TilføjButton.size(150, 40);
+        TilføjButton.mousePressed();
+        TilføjButton.style('background-color', 'green');
+        TilføjButton.style('color', 'black');
+        TilføjButton.style('border', 'none');
+        TilføjButton.style('border-radius', '5px');
 
-    } else {
-      RisButton.show();
-      PastaButton.show();
-      KyllingButton.show();
-      ToastButton.show();
-      AndetButton.show();
-      CancelButton.show();
-      TilføjButton.show();
-      resultText.show();
+        resultText = createElement('textarea', "Antal kcal:");
+        resultText.position(30, 450);
+        resultText.size(290, 80);
+        resultText.attribute('readonly', 'true');
+        resultText.style('font-size', '18px');
+        resultText.style('background-color', '#ffffff');
+        resultText.style('border', 'none');
+        resultText.style('border-radius', '5px');
+        resultText.style('resize', 'none');
+
+      } else {
+        RisButton.show();
+        PastaButton.show();
+        KyllingButton.show();
+        ToastButton.show();
+        AndetButton.show();
+        CancelButton.show();
+        TilføjButton.show();
+        resultText.show();
+      }
     }
-  }
-  function HideButtons() {
-    console.log("test")
-    RisButton.hide();
-    PastaButton.hide();
-    KyllingButton.hide();
-    ToastButton.hide();
-    AndetButton.hide();
-    CancelButton.hide();
-    TilføjButton.hide();
-    resultText.hide();
-  }
-}
-
-function AftensmadUI() {
-  let KartoflerButton, resultText, CancelButton, BroccoliButton, KyllingButton, KRBButton, AndetButton, TilføjButton
-  this.enter = function () {
-    createCanvas(350, 550);
-    background('#f0f0f0');
-
-    textSize(26);
-    textAlign(CENTER);
-    fill('#333');
-    text("Aftensmad", width / 2, 50);
-
-    if (KartoflerButton == null) {
-
-      KartoflerButton = createButton('Kartofler');
-      KartoflerButton.position(25, 95);
-      KartoflerButton.size(290, 40);
-      KartoflerButton.mousePressed();
-      KartoflerButton.style('background-color', 'yellow');
-      KartoflerButton.style('color', 'black');
-      KartoflerButton.style('border', 'none');
-      KartoflerButton.style('border-radius', '5px');
-      KartoflerButton.mousePressed();
-
-
-      BroccoliButton = createButton('Broccoli');
-      BroccoliButton.position(25, 145);
-      BroccoliButton.size(290, 40);
-      BroccoliButton.mousePressed();
-      BroccoliButton.style('background-color', 'yellow');
-      BroccoliButton.style('color', 'black');
-      BroccoliButton.style('border', 'none');
-      BroccoliButton.style('border-radius', '5px');
-
-
-      KyllingButton = createButton('Kylling');
-      KyllingButton.position(25, 195);
-      KyllingButton.size(290, 40);
-      KyllingButton.mousePressed();
-      KyllingButton.style('background-color', 'yellow');
-      KyllingButton.style('color', 'black');
-      KyllingButton.style('border', 'none');
-      KyllingButton.style('border-radius', '5px');
-
-      KRBButton = createButton('Kylling, Ris og Broccoli');
-      KRBButton.position(25, 245);
-      KRBButton.size(290, 40);
-      KRBButton.mousePressed();
-      KRBButton.style('background-color', 'green');
-      KRBButton.style('color', 'black');
-      KRBButton.style('border', 'none');
-      KRBButton.style('border-radius', '5px');
-
-      AndetButton = createButton('Andet');
-      AndetButton.position(25, 295);
-      AndetButton.size(290, 40);
-      AndetButton.style('background-color', 'pink');
-      AndetButton.style('color', 'black');
-      AndetButton.style('border', 'none');
-      AndetButton.style('border-radius', '5px');
-      AndetButton.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
-
-      CancelButton = createButton('Tilbage');
-      CancelButton.position(15, 395);
-      CancelButton.size(150, 40);
-      CancelButton.style('background-color', 'red');
-      CancelButton.style('color', 'black');
-      CancelButton.style('border', 'none');
-      CancelButton.style('border-radius', '5px');
-      CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
-
-      TilføjButton = createButton('Tilføj');
-      TilføjButton.position(180, 395);
-      TilføjButton.size(150, 40);
-      TilføjButton.mousePressed();
-      TilføjButton.style('background-color', 'green');
-      TilføjButton.style('color', 'black');
-      TilføjButton.style('border', 'none');
-      TilføjButton.style('border-radius', '5px');
-
-      resultText = createElement('textarea', "Antal kcal:");
-      resultText.position(30, 450);
-      resultText.size(290, 80);
-      resultText.attribute('readonly', 'true');
-      resultText.style('font-size', '18px');
-      resultText.style('background-color', '#ffffff');
-      resultText.style('border', 'none');
-      resultText.style('border-radius', '5px');
-      resultText.style('resize', 'none');
-
-    } else {
-      resultText.show();
-      KartoflerButton.show();
-      BroccoliButton.show();
-      KRBButton.show();
-      AndetButton.show();
-      KyllingButton.show();
-      TilføjButton.show();
-      CancelButton.show();
+    function HideButtons() {
+      console.log("test")
+      RisButton.hide();
+      PastaButton.hide();
+      KyllingButton.hide();
+      ToastButton.hide();
+      AndetButton.hide();
+      CancelButton.hide();
+      TilføjButton.hide();
+      resultText.hide();
     }
   }
 
-  function HideButtons() {
-    resultText.hide();
-    KartoflerButton.hide();
-    BroccoliButton.hide();
-    KRBButton.hide();
-    AndetButton.hide();
-    KyllingButton.hide();
-    TilføjButton.hide();
-    CancelButton.hide();
-  }
-}
+  function AftensmadUI() {
+    let KartoflerButton, resultText, CancelButton, BroccoliButton, KyllingButton, KRBButton, AndetButton, TilføjButton
+    this.enter = function () {
+      createCanvas(350, 550);
+      background('#f0f0f0');
 
-function SnackUI() {
-  let KaffeButton, RiskiksButton, SkyrButton, PBButton, AndetButton, CancelButton, TilføjButton, resultText
+      textSize(26);
+      textAlign(CENTER);
+      fill('#333');
+      text("Aftensmad", width / 2, 50);
 
-  this.enter = function () {
-    createCanvas(350, 550);
-    background('#f0f0f0');
+      if (KartoflerButton == null) {
 
-    textSize(26);
-    textAlign(CENTER);
-    fill('#333');
-    text("Snacks", width / 2, 50);
+        KartoflerButton = createButton('Kartofler');
+        KartoflerButton.position(25, 95);
+        KartoflerButton.size(290, 40);
+        KartoflerButton.mousePressed();
+        KartoflerButton.style('background-color', 'yellow');
+        KartoflerButton.style('color', 'black');
+        KartoflerButton.style('border', 'none');
+        KartoflerButton.style('border-radius', '5px');
+        KartoflerButton.mousePressed();
 
-    if (KaffeButton == null) {
 
-      KaffeButton = createButton('Kaffe');
-      KaffeButton.position(25, 95);
-      KaffeButton.size(290, 40);
-      KaffeButton.mousePressed();
-      KaffeButton.style('background-color', 'yellow');
-      KaffeButton.style('color', 'black');
-      KaffeButton.style('border', 'none');
-      KaffeButton.style('border-radius', '5px');
+        BroccoliButton = createButton('Broccoli');
+        BroccoliButton.position(25, 145);
+        BroccoliButton.size(290, 40);
+        BroccoliButton.mousePressed();
+        BroccoliButton.style('background-color', 'yellow');
+        BroccoliButton.style('color', 'black');
+        BroccoliButton.style('border', 'none');
+        BroccoliButton.style('border-radius', '5px');
 
-      RiskiksButton = createButton('Riskiks');
-      RiskiksButton.position(25, 145);
-      RiskiksButton.size(290, 40);
-      RiskiksButton.mousePressed();
-      RiskiksButton.style('background-color', 'yellow');
-      RiskiksButton.style('color', 'black');
-      RiskiksButton.style('border', 'none');
-      RiskiksButton.style('border-radius', '5px');
 
-      SkyrButton = createButton('Skyr');
-      SkyrButton.position(25, 195);
-      SkyrButton.size(290, 40);
-      SkyrButton.mousePressed();
-      SkyrButton.style('background-color', 'yellow');
-      SkyrButton.style('color', 'black');
-      SkyrButton.style('border', 'none');
-      SkyrButton.style('border-radius', '5px');
+        KyllingButton = createButton('Kylling');
+        KyllingButton.position(25, 195);
+        KyllingButton.size(290, 40);
+        KyllingButton.mousePressed();
+        KyllingButton.style('background-color', 'yellow');
+        KyllingButton.style('color', 'black');
+        KyllingButton.style('border', 'none');
+        KyllingButton.style('border-radius', '5px');
 
-      PBButton = createButton('Protein bar');
-      PBButton.position(25, 245);
-      PBButton.size(290, 40);
-      PBButton.mousePressed();
-      PBButton.style('background-color', 'green');
-      PBButton.style('color', 'black');
-      PBButton.style('border', 'none');
-      PBButton.style('border-radius', '5px');
+        KRBButton = createButton('Kylling, Ris og Broccoli');
+        KRBButton.position(25, 245);
+        KRBButton.size(290, 40);
+        KRBButton.mousePressed();
+        KRBButton.style('background-color', 'green');
+        KRBButton.style('color', 'black');
+        KRBButton.style('border', 'none');
+        KRBButton.style('border-radius', '5px');
 
-      AndetButton = createButton('Opskrifter');
-      AndetButton.position(25, 295);
-      AndetButton.size(290, 40);
-      AndetButton.style('background-color', 'pink');
-      AndetButton.style('color', 'black');
-      AndetButton.style('border', 'none');
-      AndetButton.style('border-radius', '5px');
-      AndetButton.mousePressed(function () {
-        mgr.showScene(OpskrifterUI)
-        HideButtons();
-      })
+        AndetButton = createButton('Andet');
+        AndetButton.position(25, 295);
+        AndetButton.size(290, 40);
+        AndetButton.style('background-color', 'pink');
+        AndetButton.style('color', 'black');
+        AndetButton.style('border', 'none');
+        AndetButton.style('border-radius', '5px');
+        AndetButton.mousePressed(function () {
+          mgr.showScene(OpskrifterUI)
+          HideButtons();
+        })
 
-      CancelButton = createButton('Tilbage');
-      CancelButton.position(15, 395);
-      CancelButton.size(150, 40);
-      CancelButton.style('background-color', 'red');
-      CancelButton.style('color', 'black');
-      CancelButton.style('border', 'none');
-      CancelButton.style('border-radius', '5px');
-      CancelButton.mousePressed(function () {
-        mgr.showScene(Dashboard)
-        HideButtons();
-      })
+        CancelButton = createButton('Tilbage');
+        CancelButton.position(15, 395);
+        CancelButton.size(150, 40);
+        CancelButton.style('background-color', 'red');
+        CancelButton.style('color', 'black');
+        CancelButton.style('border', 'none');
+        CancelButton.style('border-radius', '5px');
+        CancelButton.mousePressed(function () {
+          mgr.showScene(Dashboard)
+          HideButtons();
+        })
 
-      TilføjButton = createButton('Tilføj');
-      TilføjButton.position(180, 395);
-      TilføjButton.size(150, 40);
-      TilføjButton.mousePressed();
-      TilføjButton.style('background-color', 'green');
-      TilføjButton.style('color', 'black');
-      TilføjButton.style('border', 'none');
-      TilføjButton.style('border-radius', '5px');
+        TilføjButton = createButton('Tilføj');
+        TilføjButton.position(180, 395);
+        TilføjButton.size(150, 40);
+        TilføjButton.mousePressed();
+        TilføjButton.style('background-color', 'green');
+        TilføjButton.style('color', 'black');
+        TilføjButton.style('border', 'none');
+        TilføjButton.style('border-radius', '5px');
 
-      resultText = createElement('textarea', "Antal kcal:");
-      resultText.position(30, 450);
-      resultText.size(290, 80);
-      resultText.attribute('readonly', 'true');
-      resultText.style('font-size', '18px');
-      resultText.style('background-color', '#ffffff');
-      resultText.style('border', 'none');
-      resultText.style('border-radius', '5px');
-      resultText.style('resize', 'none');
+        resultText = createElement('textarea', "Antal kcal:");
+        resultText.position(30, 450);
+        resultText.size(290, 80);
+        resultText.attribute('readonly', 'true');
+        resultText.style('font-size', '18px');
+        resultText.style('background-color', '#ffffff');
+        resultText.style('border', 'none');
+        resultText.style('border-radius', '5px');
+        resultText.style('resize', 'none');
 
-    } else {
-      resultText.show();
-      PBButton.show();
-      KaffeButton.show();
-      RiskiksButton.show();
-      AndetButton.show();
-      SkyrButton.show();
-      TilføjButton.show();
-      CancelButton.show();
+      } else {
+        resultText.show();
+        KartoflerButton.show();
+        BroccoliButton.show();
+        KRBButton.show();
+        AndetButton.show();
+        KyllingButton.show();
+        TilføjButton.show();
+        CancelButton.show();
+      }
+    }
+
+    function HideButtons() {
+      resultText.hide();
+      KartoflerButton.hide();
+      BroccoliButton.hide();
+      KRBButton.hide();
+      AndetButton.hide();
+      KyllingButton.hide();
+      TilføjButton.hide();
+      CancelButton.hide();
     }
   }
 
-  function HideButtons() {
-    resultText.hide();
-    PBButton.hide();
-    KaffeButton.hide();
-    RiskiksButton.hide();
-    AndetButton.hide();
-    SkyrButton.hide();
-    TilføjButton.hide();
-    CancelButton.hide();
+  function SnackUI() {
+    let KaffeButton, RiskiksButton, SkyrButton, PBButton, AndetButton, CancelButton, TilføjButton, resultText
+
+    this.enter = function () {
+      createCanvas(350, 550);
+      background('#f0f0f0');
+
+      textSize(26);
+      textAlign(CENTER);
+      fill('#333');
+      text("Snacks", width / 2, 50);
+
+      if (KaffeButton == null) {
+
+        KaffeButton = createButton('Kaffe');
+        KaffeButton.position(25, 95);
+        KaffeButton.size(290, 40);
+        KaffeButton.mousePressed();
+        KaffeButton.style('background-color', 'yellow');
+        KaffeButton.style('color', 'black');
+        KaffeButton.style('border', 'none');
+        KaffeButton.style('border-radius', '5px');
+
+        RiskiksButton = createButton('Riskiks');
+        RiskiksButton.position(25, 145);
+        RiskiksButton.size(290, 40);
+        RiskiksButton.mousePressed();
+        RiskiksButton.style('background-color', 'yellow');
+        RiskiksButton.style('color', 'black');
+        RiskiksButton.style('border', 'none');
+        RiskiksButton.style('border-radius', '5px');
+
+        SkyrButton = createButton('Skyr');
+        SkyrButton.position(25, 195);
+        SkyrButton.size(290, 40);
+        SkyrButton.mousePressed();
+        SkyrButton.style('background-color', 'yellow');
+        SkyrButton.style('color', 'black');
+        SkyrButton.style('border', 'none');
+        SkyrButton.style('border-radius', '5px');
+
+        PBButton = createButton('Protein bar');
+        PBButton.position(25, 245);
+        PBButton.size(290, 40);
+        PBButton.mousePressed();
+        PBButton.style('background-color', 'green');
+        PBButton.style('color', 'black');
+        PBButton.style('border', 'none');
+        PBButton.style('border-radius', '5px');
+
+        AndetButton = createButton('Opskrifter');
+        AndetButton.position(25, 295);
+        AndetButton.size(290, 40);
+        AndetButton.style('background-color', 'pink');
+        AndetButton.style('color', 'black');
+        AndetButton.style('border', 'none');
+        AndetButton.style('border-radius', '5px');
+        AndetButton.mousePressed(function () {
+          mgr.showScene(OpskrifterUI)
+          HideButtons();
+        })
+
+        CancelButton = createButton('Tilbage');
+        CancelButton.position(15, 395);
+        CancelButton.size(150, 40);
+        CancelButton.style('background-color', 'red');
+        CancelButton.style('color', 'black');
+        CancelButton.style('border', 'none');
+        CancelButton.style('border-radius', '5px');
+        CancelButton.mousePressed(function () {
+          mgr.showScene(Dashboard)
+          HideButtons();
+        })
+
+        TilføjButton = createButton('Tilføj');
+        TilføjButton.position(180, 395);
+        TilføjButton.size(150, 40);
+        TilføjButton.mousePressed();
+        TilføjButton.style('background-color', 'green');
+        TilføjButton.style('color', 'black');
+        TilføjButton.style('border', 'none');
+        TilføjButton.style('border-radius', '5px');
+
+        resultText = createElement('textarea', "Antal kcal:");
+        resultText.position(30, 450);
+        resultText.size(290, 80);
+        resultText.attribute('readonly', 'true');
+        resultText.style('font-size', '18px');
+        resultText.style('background-color', '#ffffff');
+        resultText.style('border', 'none');
+        resultText.style('border-radius', '5px');
+        resultText.style('resize', 'none');
+
+      } else {
+        resultText.show();
+        PBButton.show();
+        KaffeButton.show();
+        RiskiksButton.show();
+        AndetButton.show();
+        SkyrButton.show();
+        TilføjButton.show();
+        CancelButton.show();
+      }
+    }
+
+    function HideButtons() {
+      resultText.hide();
+      PBButton.hide();
+      KaffeButton.hide();
+      RiskiksButton.hide();
+      AndetButton.hide();
+      SkyrButton.hide();
+      TilføjButton.hide();
+      CancelButton.hide();
+    }
   }
-}
