@@ -132,6 +132,7 @@ function Dashboard() {
 function OpskrifterUI() {
 
   let CancelButton, TilføjButton;
+  let searchInput; // Declare search input variable
 
   this.enter = function () {
     createCanvas(350, 550);
@@ -142,6 +143,11 @@ function OpskrifterUI() {
     fill('#333');
     text("Personlige opskrifter", width / 2, 50);
 
+    // Create search input field
+    searchInput = createInput();
+    searchInput.position(25, 100);
+    searchInput.size(285, 30);
+    searchInput.attribute('placeholder', 'Søg opskrift');
 
     if (CancelButton == null) {
       CancelButton = createButton('Tilbage');
@@ -166,7 +172,7 @@ function OpskrifterUI() {
       TilføjButton.style('border-radius', '5px');
       
       MyOP1Button = createButton('Min personlige opskrift 1');
-      MyOP1Button.position(25, 145);
+      MyOP1Button.position(25, 150);
       MyOP1Button.size(290, 40);
       MyOP1Button.mousePressed();
       MyOP1Button.style('background-color', 'pink');
@@ -175,7 +181,7 @@ function OpskrifterUI() {
       MyOP1Button.style('border-radius', '5px');
 
       MyOP2Button = createButton('Min pesonlige opskrift 2');
-      MyOP2Button.position(25, 205);
+      MyOP2Button.position(25, 210);
       MyOP2Button.size(290, 40);
       MyOP2Button.mousePressed();
       MyOP2Button.style('background-color', 'pink')
@@ -190,6 +196,7 @@ function OpskrifterUI() {
       MyOP1Button.show();
     }
   }
+
   function HideButtons() {
     CancelButton.hide();
     TilføjButton.hide();
@@ -197,6 +204,7 @@ function OpskrifterUI() {
     MyOP1Button.hide();
   }
 }
+
 
 
 
