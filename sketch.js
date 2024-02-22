@@ -1,5 +1,6 @@
 let mgr;
 let foodData;
+let FinalCalories = 0;
 
 function preload (){
   foodData = loadJSON("https://stor.25nets.com/CalorieData.json")
@@ -327,10 +328,9 @@ function LigevægtsindtagUI() {
   }
 }
 
-
-
 function MorgenmadUI() {
   let SkyrButton, BananButton, BollerButton, SmoothieButton, AndetButton, CancelButton, TilføjButton, ResultText
+  let MorCalories = 0
 
   this.enter = function () {
     createCanvas(350, 550);
@@ -351,6 +351,10 @@ function MorgenmadUI() {
       SkyrButton.style('color', 'black');
       SkyrButton.style('border', 'none');
       SkyrButton.style('border-radius', '5px');
+      SkyrButton.mousePressed(function () {
+        MorCalories += GetFoodData("Skyr").calories;
+        console.log(MorCalories)
+      })
 
       BananButton = createButton('Banan');
       BananButton.position(25, 145);
@@ -360,6 +364,9 @@ function MorgenmadUI() {
       BananButton.style('color', 'black');
       BananButton.style('border', 'none');
       BananButton.style('border-radius', '5px');
+      BananButton.mousePressed(function () {
+        MorCalories += GetFoodData("Banan").calories;
+      })
 
       BollerButton = createButton('Boller');
       BollerButton.position(25, 195);
@@ -369,6 +376,9 @@ function MorgenmadUI() {
       BollerButton.style('color', 'black');
       BollerButton.style('border', 'none');
       BollerButton.style('border-radius', '5px');
+      BollerButton.mousePressed(function () {
+        MorCalories += GetFoodData("Boller").calories;
+      })
 
       SmoothieButton = createButton('Smoothie');
       SmoothieButton.position(25, 245);
@@ -378,6 +388,9 @@ function MorgenmadUI() {
       SmoothieButton.style('color', 'black');
       SmoothieButton.style('border', 'none');
       SmoothieButton.style('border-radius', '5px');
+      SmoothieButton.mousePressed(function () {
+        MorCalories += GetFoodData("Smoothie").calories;
+      })
 
       AndetButton = createButton('Opskrifter');
       AndetButton.position(25, 295);
@@ -414,6 +427,9 @@ function MorgenmadUI() {
       TilføjButton.style('color', 'black');
       TilføjButton.style('border', 'none');
       TilføjButton.style('border-radius', '5px');
+      TilføjButton.mousePressed(function () {
+        FinalCalories += MorCalories;
+      })
 
       ResultText = createElement('textarea', "Antal kcal:");
       ResultText.position(30, 450);
@@ -424,6 +440,7 @@ function MorgenmadUI() {
       ResultText.style('border', 'none');
       ResultText.style('border-radius', '5px');
       ResultText.style('resize', 'none');
+
     }
     else {
       SkyrButton.show()
