@@ -219,6 +219,14 @@ function LigevægtsindtagUI() {
   this.enter = function () {
     createCanvas(350, 600);
     background('#f0f0f0');
+    
+    textAlign(LEFT);
+    textSize(18);
+    fill('#555');
+    text("Højde (CM):", 60, 200);
+    text("Vægt (KG):", 60, 130);
+    text("Alder (år):", 60, 270);
+    text("Køn:", 60, 340);
 
     textSize(26);
     textAlign(CENTER);
@@ -258,14 +266,6 @@ function LigevægtsindtagUI() {
       kønInput.option('Mand');
       kønInput.option('Kvinde');
       kønInput.style('border-radius', '5px');
-
-      textAlign(LEFT);
-      textSize(18);
-      fill('#555');
-      text("Højde (CM):", 60, 200);
-      text("Vægt (KG):", 60, 130);
-      text("Alder (år):", 60, 270);
-      text("Køn:", 60, 340);
 
       CancelButton = createButton('Tilbage');
       CancelButton.position(20, 500);
