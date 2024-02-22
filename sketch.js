@@ -363,26 +363,22 @@ function LigevægtsindtagUI() {
     kønInput.hide();
   }
 
-  function beregnBMI(){
-  let vægt = parseFloat(vægtInput.value());
-  let højde = parseFloat(højdeInput.value()) / 100; // Konverterer højde til meter
-  let bmi = vægt / (højde * højde);
-  resultText.value("Dit BMI er: " + bmi.toFixed(2));
+  function beregnLigevægtsindtag() {
+    let vægt = parseFloat(vægtInput.value());
+    let højde = parseFloat(højdeInput.value());
+    let alder = parseInt(alderInput.value());
+    let køn = kønInput.value();
 
-  let besked;
-  if (bmi < 18.5) {
-    besked = "Undervægtig";
-  } else if (bmi >= 18.5 && bmi < 25) {
-    besked = "Normalvægtig";
-  } else if (bmi >= 25 && bmi < 30) {
-    besked = "Overvægtig";
-  } else {
-    besked = "Svært overvægtig";
+    let ligevægtsindtag;
+
+    if (køn === 'Mand') {
+      ligevægtsindtag = 66.5 + (13.75 * vægt) + (5.003 * højde) - (6.755 * alder);
+    } else {
+      ligevægtsindtag = 655.1 + (9.563 * vægt) + (1.850 * højde) - (4.676 * alder);
+    }
+
+    resultText.value("Dit ligevægtsindtag er: " + ligevægtsindtag.toFixed(2) + " kcal pr. dag");
   }
-
-  // Opdater tekstfeltet med beskeden
-  resultText.value(resultText.value() + ". Du er " + besked);
-}
 }
 
 function MorgenmadUI() {
@@ -550,7 +546,7 @@ function FrokostUI() {
       PastaButton.style('color', 'black');
       PastaButton.style('border', 'none');
       PastaButton.style('border-radius', '5px');
-
+      
       KyllingButton = createButton('Kylling');
       KyllingButton.position(25, 195);
       KyllingButton.size(290, 40);
