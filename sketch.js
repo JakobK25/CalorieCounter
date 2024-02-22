@@ -114,7 +114,54 @@ function Dashboard() {
 
 function OpskrifterUI() {
 
+  let CancelButton, TilføjButton;
+
+  this.enter = function () {
+    createCanvas(350, 550);
+    background('#f0f0f0');
+
+    textSize(26);
+    textAlign(CENTER);
+    fill('#333');
+    text("Opskrifter", width / 2, 50);
+
+
+    if (CancelButton == null) {
+      CancelButton = createButton('Cancel');
+      CancelButton.position(15, 395);
+      CancelButton.size(150, 40);
+      CancelButton.style('background-color', 'red');
+      CancelButton.style('color', 'black');
+      CancelButton.style('border', 'none');
+      CancelButton.style('border-radius', '5px');
+      CancelButton.mousePressed(function () {
+        mgr.showScene(Dashboard)
+        HideButtons();
+      })
+
+      TilføjButton = createButton('Lav ny opskrift');
+      TilføjButton.position(180, 395);
+      TilføjButton.size(150, 40);
+      TilføjButton.mousePressed();
+      TilføjButton.style('background-color', 'green');
+      TilføjButton.style('color', 'black');
+      TilføjButton.style('border', 'none');
+      TilføjButton.style('border-radius', '5px');
+
+
+
+    } else {
+      CancelButton.show();
+      TilføjButton.show();
+    }
+  }
+  function HideButtons() {
+    CancelButton.hide();
+    TilføjButton.hide();
+  }
 }
+
+
 
 function BMIUI() {
 
