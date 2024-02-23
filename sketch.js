@@ -44,7 +44,7 @@ function GetFoodData(name) {
 
 function Dashboard() {
   //alle elementer i Dashboard
-  let MorgenmadKnap, FrokostKnap, AftensmadKnap, SnackKnap, LigevægtsindtagKnap, OpskrifterKnap;
+  let CalorieGoal, MorgenmadKnap, FrokostKnap, AftensmadKnap, SnackKnap, LigevægtsindtagKnap, OpskrifterKnap;
 
   //SETUP funktionen der viser alle elementer
   this.enter = function () {
@@ -163,19 +163,19 @@ function Dashboard() {
     SnackKnap.show();
     LigevægtsindtagKnap.show();
     OpskrifterKnap.show();
+    CalorieGoal.show()
+  }
+
+  function HideButtons() {
+    MorgenmadKnap.hide();
+    FrokostKnap.hide();
+    AftensmadKnap.hide();
+    SnackKnap.hide();
+    LigevægtsindtagKnap.hide();
+    OpskrifterKnap.hide();
+    CalorieGoal.hide()
   }
 }
-
-//ksjuler alle elementer i denne scene (DASHBOARD)
-function HideButtons() {
-  MorgenmadKnap.hide();
-  FrokostKnap.hide();
-  AftensmadKnap.hide();
-  SnackKnap.hide();
-  LigevægtsindtagKnap.hide();
-  OpskrifterKnap.hide();
-}
-
 
 function OpskrifterUI() {
 
@@ -254,10 +254,6 @@ function OpskrifterUI() {
     searchInput.hide();
   }
 }
-
-
-
-
 
 function LigevægtsindtagUI() {
 
