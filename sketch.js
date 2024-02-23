@@ -1,6 +1,7 @@
 let mgr;
 let foodData;
 let FinalCalories = 0;
+let CalorieGoalVal = 0;
 
 function preload() {
   foodData = loadJSON("https://stor.25nets.com/CalorieData.json")
@@ -48,7 +49,6 @@ function Dashboard() {
 
   //SETUP funktionen der viser alle elementer
   this.enter = function () {
-    console.log("Hello")
     createCanvas(350, 550);
     background(200);
 
@@ -60,14 +60,16 @@ function Dashboard() {
     CalorieGoal = createInput();
     CalorieGoal.position(105, 400)
     CalorieGoal.size(130, 30)
+    CalorieGoal.input(updateCalorieGoal)
+
     // Opdater kalorier baseret på simulering
     CurrentCalories += FinalCalories;
 
     // Beregn fyldningsgraden i grader
-    let CircleInFill = map(CurrentCalories, 0, CalorieGoal, 0, 360);
+    let CircleInFill = map(CurrentCalories, 0, CalorieGoalVal, 0, 360);
 
     // Beregn procentdel af målet
-    let procentOpnået = CurrentCalories / CalorieGoal;
+    let procentOpnået = CurrentCalories / CalorieGoalVal;
 
     // Juster fyldningsgraden for at nå 360 grader ved 100%
     if (procentOpnået >= 1) {
@@ -89,18 +91,23 @@ function Dashboard() {
     // Vis tekst med kalorier og procentdel
     textSize(16);
     textAlign(CENTER);
-    text(`${CurrentCalories} / ${CalorieGoal}`, 175, 138);
-
-
-    function logMåltid(FinalCalories, kalorier) {
-      FinalCalories += kalorier;
-    }
+    let calcorieInputField = createElement('textarea', `${CurrentCalories} / ${CalorieGoalVal}`);
+    calcorieInputField.position(85, 125);
+    calcorieInputField.size(175, 30);
+    calcorieInputField.attribute('readonly', true);
+    calcorieInputField.style('font-size', '23px');
+    calcorieInputField.style('background-color', '#ffffff');
+    calcorieInputField.style('border', 'none');
+    calcorieInputField.style('border-radius', '5px');
+    calcorieInputField.style('resize', 'none');
+    calcorieInputField.style('text-align', 'center')
+    calcorieInputField.style('vertical-align', 'middle')
 
     //laver alle elementer HVIS de ikke eksistere
     //vi tjekker om elementer eksistere ved at tjekke på om de er null
     if (MorgenmadKnap == null) {
       MorgenmadKnap = createButton("Morgenmad");
-      MorgenmadKnap.position(125, 150);
+      MorgenmadKnap.position(125, 175);
       MorgenmadKnap.size(100, 30);
       MorgenmadKnap.style('background-color', '#ECC61A');
       MorgenmadKnap.mousePressed(function () {
@@ -108,9 +115,8 @@ function Dashboard() {
         HideButtons();
       })
 
-
       FrokostKnap = createButton("Frokost")
-      FrokostKnap.position(125, 200);
+      FrokostKnap.position(125, 215);
       FrokostKnap.size(100, 30);
       FrokostKnap.style('background-color', '#ECC61A');
       FrokostKnap.mousePressed(function () {
@@ -119,7 +125,7 @@ function Dashboard() {
 
       })
       AftensmadKnap = createButton("Aftensmad")
-      AftensmadKnap.position(125, 250);
+      AftensmadKnap.position(125, 255);
       AftensmadKnap.size(100, 30);
       AftensmadKnap.style('background-color', '#ECC61A');
       AftensmadKnap.mousePressed(function () {
@@ -127,7 +133,7 @@ function Dashboard() {
         HideButtons();
       })
       SnackKnap = createButton("Snack")
-      SnackKnap.position(125, 300);
+      SnackKnap.position(125, 295);
       SnackKnap.size(100, 30);
       SnackKnap.style('background-color', '#ECC61A');
       SnackKnap.mousePressed(function () {
@@ -161,6 +167,13 @@ function Dashboard() {
       LigevægtsindtagKnap.show();
       OpskrifterKnap.show();
       CalorieGoal.show();
+      calcorieInputField.show();
+    }
+
+    function updateCalorieGoal() {
+      CalorieGoalVal = CalorieGoal.value();
+      calcorieInputField.value(`${CurrentCalories} / ${CalorieGoalVal}`)
+
     }
 
     function HideButtons() {
@@ -171,6 +184,7 @@ function Dashboard() {
       LigevægtsindtagKnap.hide();
       OpskrifterKnap.hide();
       CalorieGoal.hide();
+      calcorieInputField.hide();
     }
   }
 }
