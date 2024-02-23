@@ -486,6 +486,7 @@ function MorgenmadUI() {
       TilføjButton.style('border-radius', '5px');
       TilføjButton.mousePressed(function () {
         FinalCalories = + MorCalories
+        MorCalories = 0
         mgr.showScene(Dashboard);
         HideButtons()
       });
