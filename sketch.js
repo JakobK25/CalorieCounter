@@ -472,6 +472,7 @@ function MorgenmadUI() {
       CancelButton.style('border', 'none');
       CancelButton.style('border-radius', '5px');
       CancelButton.mousePressed(function () {
+        MorCalories = 0
         mgr.showScene(Dashboard);
         HideButtons()
       });
